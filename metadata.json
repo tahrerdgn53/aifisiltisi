@@ -1,0 +1,6 @@
+{
+  "name": "AIFısıltısı",
+  "description": "Yapay zeka fısıltılarını, en son haberleri ve yenilikçi yapay zeka araçlarını keşfedebileceğiniz modern ve minimalist bir platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
