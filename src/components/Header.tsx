@@ -48,26 +48,20 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b backdrop-blur-md px-4 sm:px-8 py-4 bg-[#02040b]/90 border-white/5 text-slate-100">
+    <header className="sticky top-0 z-40 w-full border-b backdrop-blur-md px-4 sm:px-8 py-7 bg-[#02040b]/90 border-white/5 text-slate-100">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* Brand Logo & Name */}
         <div 
           onClick={handleBrandClick} 
-          className="flex items-center space-x-3 cursor-pointer group select-none"
+          className="flex items-center min-w-[280px] cursor-pointer select-none"
         >
-          <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/15 transition-transform duration-300 group-hover:scale-105">
-            <Sparkles className="w-5 h-5 text-white group-hover:rotate-12 transition-transform duration-300" />
-          </div>
-          
-          <div>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight flex items-center select-none">
-              <span className="text-white">AI</span>
-              {/* Corrected gradient and opacity to be fully vibrant and crisp */}
-              <span className="bg-gradient-to-r from-cyan-400 via-sky-305 to-indigo-400 bg-clip-text text-transparent font-extrabold opacity-100 tracking-tight ml-0.5">Fısıltısı</span>
-            </h1>
-            <p className="text-[9px] text-cyan-400/80 font-mono tracking-widest uppercase font-bold">YAPAY ZEKA REHBERİ</p>
-          </div>
+          <img 
+            src="logo.png" 
+            alt="AI Fısıltısı Logo" 
+            className="h-[110px] md:h-[150px] w-auto object-contain"
+            referrerPolicy="no-referrer"
+          />
         </div>
 
         {/* Navigation & Section Tab controls */}

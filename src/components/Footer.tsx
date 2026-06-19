@@ -31,13 +31,13 @@ export default function Footer() {
         
         {/* Brand section */}
         <div className="md:col-span-1.5 space-y-4">
-          <Link to="/" className="flex items-center space-x-2.5">
-            <span className="text-xl font-extrabold text-white tracking-tight">
-              AI<span className="bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">Fısıltısı</span>
-            </span>
-            <span className="text-[9px] bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded-full font-mono border border-cyan-500/20 font-bold uppercase tracking-widest">
-              PRO
-            </span>
+          <Link to="/" className="inline-block select-none">
+            <img 
+              src="./logo.png" 
+              alt="AI Fısıltısı Logo" 
+              className="h-[70px] md:h-[90px] w-auto object-contain transition-opacity hover:opacity-90"
+              referrerPolicy="no-referrer"
+            />
           </Link>
           <p className="text-xs text-slate-500 leading-relaxed font-light">
             Sektör lideri yapay zeka araçlarını ve anlık teknoloji gelişmelerini derinlemesine analiz edip size fısıldayan bağımsız içerik platformu.
