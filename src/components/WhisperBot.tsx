@@ -131,7 +131,7 @@ export default function WhisperBot({ isOpen, onClose }: WhisperBotProps) {
                   <span className="absolute top-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-indigo-950"></span>
                 </div>
                 <div>
-                  <h3 className="text-sm sm:text-base font-bold text-white tracking-wide">Fısıltı Asistanı</h3>
+                  <h3 className="text-sm sm:text-base font-bold text-white tracking-wide">Akıllı Öneri Rehberi</h3>
                   <div className="flex items-center space-x-1.5">
                     <AudioLines className="w-3 h-3 text-cyan-400 animate-pulse" />
                     <span className="text-[10px] font-mono text-cyan-300">Akıllı Öneri Modu</span>

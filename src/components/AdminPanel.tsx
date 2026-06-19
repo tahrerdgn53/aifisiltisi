@@ -164,15 +164,6 @@ export default function AdminPanel({
                   </button>
                 </form>
 
-                {/* Helpful Instruction box for AI Studio tester */}
-                <div className="p-3.5 rounded-xl bg-cyan-950/20 border border-cyan-500/20 text-cyan-300 text-xs flex items-start space-x-2.5 text-left font-light leading-relaxed">
-                  <Info className="w-4 h-4 flex-shrink-0 mt-0.5 text-cyan-400" />
-                  <div>
-                    <span className="font-bold block mb-0.5">Test İpucu:</span>
-                    Arayüzün kurgulanan yönetim mekanizmasını test etmek için şu şifreyi yazın: <strong className="font-mono bg-cyan-900/40 px-1.5 py-0.5 rounded text-white text-[11px]">fisilti123</strong>
-                  </div>
-                </div>
-
               </div>
             ) : (
               /* --- HIGH END ADMIN DASHBOARD VIEW --- */
