@@ -29,7 +29,7 @@ export default function ToolGrid({
   setSearchQuery
 }: ToolGridProps) {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [pricingFilter, setPricingFilter] = useState<'All' | 'Ücretsiz' | 'Freemium' | 'Ücretli'>('All');
+  const [pricingFilter, setPricingFilter] = useState<'All' | 'Ücretsiz' | 'Ücretli' | 'Freemium'>('All');
   const [showOnlyBookmarks, setShowOnlyBookmarks] = useState(false);
   const [layoutMode, setLayoutMode] = useState<'grid' | 'list'>('grid');
 
@@ -94,13 +94,13 @@ export default function ToolGrid({
           </div>
 
           {/* Pricing Toggle Pills */}
-          <div className="lg:col-span-4 flex items-center space-x-1 p-1 bg-slate-900/60 rounded-2xl border border-white/5">
-            <span className="text-[10px] uppercase font-mono text-slate-500 pl-3 hidden sm:inline-block">Ücret:</span>
-            {(['All', 'Ücretsiz', 'Freemium', 'Ücretli'] as const).map((mode) => (
+          <div className="lg:col-span-4 flex items-center justify-between gap-1 p-1 bg-slate-900/60 rounded-2xl border border-white/5 min-w-0">
+            <span className="text-[10px] uppercase font-mono text-slate-500 pl-2 hidden xl:inline-block whitespace-nowrap">Ücret:</span>
+            {(['All', 'Ücretsiz', 'Ücretli', 'Freemium'] as const).map((mode) => (
               <button
                 key={mode}
                 onClick={() => setPricingFilter(mode)}
-                className={`flex-1 text-center py-2 px-3 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer ${
+                className={`flex-1 text-center py-2 px-1.5 sm:px-2.5 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition cursor-pointer ${
                   pricingFilter === mode
                     ? 'bg-gradient-to-r from-cyan-400 to-blue-600 text-white shadow-sm'
                     : 'text-slate-400 hover:text-slate-200 border border-transparent'

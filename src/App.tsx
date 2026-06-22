@@ -309,6 +309,7 @@ function AppContent() {
       upvotes: 1,
       bookmarks: false,
       featured: false,
+      developer: newTool.developer || 'AI Fısıltısı',
       addedByUser: true
     };
     const updated = [formatted, ...tools];
@@ -348,7 +349,7 @@ function AppContent() {
   // Render initialization loading skeleton screen
   if (initLoading) {
     return (
-      <div className="min-h-screen bg-[#02040a] flex flex-col items-center justify-center space-y-4">
+      <div translate="no" className="notranslate min-h-screen bg-[#02040a] flex flex-col items-center justify-center space-y-4">
         <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 border border-cyan-500/20 shadow-lg animate-bounce">
           <Sparkles className="w-7 h-7 text-cyan-400 animate-spin" strokeWidth={1.5} />
         </div>
@@ -364,7 +365,7 @@ function AppContent() {
   const bookmarkedIds = tools.filter(t => t.bookmarks).map(t => t.id);
 
   return (
-    <div className="min-h-screen flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden bg-[#020306] text-slate-100 dark">
+    <div translate="no" className="notranslate min-h-screen flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden bg-[#020306] text-slate-100 dark">
       
       {/* Absolute Header Navigation */}
       <Header

@@ -255,7 +255,7 @@ export default function ToolDetailModal({
                   ))
                 ) : (
                   <p className="text-center text-xs text-slate-600 italic py-4">
-                    Henüz yorum yapılmamış. İlk yorumu sen fısılda! 🌌
+                    Henüz yorum yok. İlk yorumu sen fısılda.
                   </p>
                 )}
               </div>

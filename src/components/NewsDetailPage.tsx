@@ -38,20 +38,13 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
       // Load specific comments from localstorage
       const stored = localStorage.getItem(`comments_news_${matched.id}`);
       if (stored) {
-        setComments(JSON.parse(stored));
+        const parsed = JSON.parse(stored) as Comment[];
+        // Filter out preset comments that start with 'cn-'
+        const userComments = parsed.filter(c => !c.id.startsWith('cn-'));
+        setComments(userComments);
+        localStorage.setItem(`comments_news_${matched.id}`, JSON.stringify(userComments));
       } else {
-        // Form initial mockup reviews
-        const demoComments: Comment[] = [
-          {
-            id: 'cn-1',
-            targetId: matched.id,
-            username: 'TeknoOkur',
-            commentText: 'Bu gelişmeyi bir süredir bekliyordum! Yapay zeka dünyasında rekabetin bu kadar hız kazanması biz son kullanıcılara son derece yarıyor. Teşekkürler fısıltı ekibi!',
-            date: '17 Haziran 2026'
-          }
-        ];
-        setComments(demoComments);
-        localStorage.setItem(`comments_news_${matched.id}`, JSON.stringify(demoComments));
+        setComments([]);
       }
     } else {
       navigate('/404');
@@ -225,7 +218,7 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
               {/* Comments Render list */}
               <div className="space-y-3 pt-4">
                 {comments.length === 0 ? (
-                  <p className="text-xs text-slate-500 text-center py-4 font-light">Bu haber hakkında henüz fikir paylaşılmamış. İlk fısıldayan siz olun!</p>
+                  <p className="text-xs text-slate-500 text-center py-4 font-light">Henüz yorum yok. İlk yorumu sen fısılda.</p>
                 ) : (
                   comments.map((c) => (
                     <div

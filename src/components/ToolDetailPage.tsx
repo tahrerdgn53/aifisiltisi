@@ -47,27 +47,13 @@ export default function ToolDetailPage({
       // Load comments from localstorage specific to this tool
       const stored = localStorage.getItem(`comments_${matched.id}`);
       if (stored) {
-        setComments(JSON.parse(stored));
+        const parsed = JSON.parse(stored) as Comment[];
+        // Filter out preset comments that start with 'c-'
+        const userComments = parsed.filter(c => !c.id.startsWith('c-'));
+        setComments(userComments);
+        localStorage.setItem(`comments_${matched.id}`, JSON.stringify(userComments));
       } else {
-        // Feed initial dummy discussions to make it feel extremely active and populated
-        const initialCommentsList: Comment[] = [
-          {
-            id: 'c-1',
-            targetId: matched.id,
-            username: 'YapayZekaMuarrizi',
-            commentText: `Harika bir inceleme! ${matched.name} aracını son 3 aydır projelerimizde aktif olarak kullanıyoruz. Günlük verimliliğimizi en az 2 katına çıkardığını söyleyebilirim. Tavsiye edilir.`,
-            date: '16 Haziran 2026'
-          },
-          {
-            id: 'c-2',
-            targetId: matched.id,
-            username: 'KreatifDirektor',
-            commentText: 'Özellikle arayüz hızı ve kullanım kolaylığı açısından piyasadaki diğer rakiplerinin fersah fersah önünde kalıyor. Beğenerek fısıldıyoruz.',
-            date: '18 Haziran 2026'
-          }
-        ];
-        setComments(initialCommentsList);
-        localStorage.setItem(`comments_${matched.id}`, JSON.stringify(initialCommentsList));
+        setComments([]);
       }
     } else {
       // Redirect to 404 if not found
@@ -155,7 +141,7 @@ export default function ToolDetailPage({
                       {tool.category.toUpperCase()}
                     </span>
                     <h1 className="text-2xl sm:text-3xl font-black text-white mt-2 tracking-tight">{tool.name}</h1>
-                    <p className="text-xs text-slate-450 mt-1 font-mono">Geliştirici: {tool.developer || 'Bilinmeyen Ortak'}</p>
+                    <p className="text-xs text-slate-450 mt-1 font-mono">Yayıncı: AI Fısıltısı</p>
                   </div>
                 </div>
 
@@ -271,7 +257,7 @@ export default function ToolDetailPage({
               {/* Comments Render list */}
               <div className="space-y-3 pt-4">
                 {comments.length === 0 ? (
-                  <p className="text-xs text-slate-500 text-center py-4 font-light">Bu araç hakkında henüz fısıldanmış bir fikir yok. İlk fısıldayan siz olun!</p>
+                  <p className="text-xs text-slate-500 text-center py-4 font-light">Henüz yorum yok. İlk yorumu sen fısılda.</p>
                 ) : (
                   comments.map((comment) => (
                     <div

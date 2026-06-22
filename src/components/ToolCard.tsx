@@ -65,7 +65,7 @@ export default function ToolCard({ tool, onUpvote, onBookmark, onSelect }: ToolC
           </div>
           <div>
             <div className="text-[10px] font-mono tracking-wider text-slate-500 uppercase">
-              {tool.developer || 'AI Fısıltısı'}
+              AI Fısıltısı
             </div>
             
             {/* User Submission indicator */}

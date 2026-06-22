@@ -72,7 +72,7 @@ export default function SubmitForm({ onAddTool, onAddNews }: SubmitFormProps) {
         logo: getRandomLogoIcon(toolCategory),
         pricing: toolPricing,
         tags: toolTags,
-        developer: toolDev || 'Bilinmeyen Geliştirici',
+        developer: toolDev || 'AI Fısıltısı',
         addedByUser: true
       });
 
