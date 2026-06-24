@@ -291,6 +291,8 @@ useEffect(() => {
       summary: news.summary,
       content: news.content,
       createdAt: news.created_at,
+      readTime: '3 dk okuma',
+      date: new Date(news.created_at).toLocaleDateString('tr-TR'),
       upvotes: 1,
       commentsCount: 0
     }));
