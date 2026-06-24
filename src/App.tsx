@@ -368,37 +368,28 @@ const handleAddNewsSubmit = async (newNews: any) => {
     summary: newNews.summary,
     content: newNews.content
   };
-  
-  await supabase.from('articles').insert([formatted]);
-
-  const { data } = await supabase
-  .from('articles')
-  .select('*')
-  .order('created_at', { ascending: false });
-
-const mappedNews = (data || []).map((news: any) => ({
-  id: String(news.id),
-  title: news.title,
-  category: news.category,
-  author: news.author,
-  source: news.source,
-  summary: news.summary,
-  content: news.content,
-  createdAt: news.created_at,
-  upvotes: 1,
-  commentsCount: 0
-}));
-
-setNewsList(mappedNews as any);
 
   await supabase.from('articles').insert([formatted]);
 
   const { data } = await supabase
     .from('articles')
     .select('*')
-    .order('id', { ascending: false });
+    .order('created_at', { ascending: false });
 
-  setNewsList((data || []) as any);
+  const mappedNews = (data || []).map((news: any) => ({
+    id: String(news.id),
+    title: news.title,
+    category: news.category,
+    author: news.author,
+    source: news.source,
+    summary: news.summary,
+    content: news.content,
+    createdAt: news.created_at,
+    upvotes: 1,
+    commentsCount: 0
+  }));
+
+  setNewsList(mappedNews as any);
 };
 
   const handleDeleteTool = (id: string) => {
