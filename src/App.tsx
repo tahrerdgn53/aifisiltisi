@@ -364,17 +364,29 @@ const handleAddNewsSubmit = async (newNews: any) => {
     title: newNews.title,
     category: newNews.category,
     author: newNews.author || 'AI Fısıltısı',
-    source: newNews.source,
-    summary: newNews.excerpt,
+    source: newNews.source || 'AI Fısıltısı',
+    summary: newNews.excerpt || newNews.summary,
     content: newNews.content
   };
 
-  await supabase.from('articles').insert([formatted]);
+  const { error } = await supabase.from('articles').insert([formatted]);
 
-  const { data } = await supabase
+  if (error) {
+    alert('Makale eklenemedi: ' + error.message);
+    console.error('Article insert error:', error);
+    return;
+  }
+
+  const { data, error: fetchError } = await supabase
     .from('articles')
     .select('*')
     .order('created_at', { ascending: false });
+
+  if (fetchError) {
+    alert('Makaleler çekilemedi: ' + fetchError.message);
+    console.error('Article fetch error:', fetchError);
+    return;
+  }
 
   const mappedNews = (data || []).map((news: any) => ({
     id: String(news.id),
@@ -383,8 +395,11 @@ const handleAddNewsSubmit = async (newNews: any) => {
     author: news.author,
     source: news.source,
     summary: news.summary,
+    excerpt: news.summary,
     content: news.content,
     createdAt: news.created_at,
+    readTime: '3 dk okuma',
+    date: new Date(news.created_at).toLocaleDateString('tr-TR'),
     upvotes: 1,
     commentsCount: 0
   }));
