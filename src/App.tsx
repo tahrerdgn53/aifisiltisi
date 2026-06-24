@@ -250,7 +250,7 @@ function AppContent() {
   };
 
   // Manage data list state and sync with localstorage
- useEffect(() => {
+useEffect(() => {
   const fetchData = async () => {
     const { data: toolsData } = await supabase
       .from('tools')
@@ -262,42 +262,42 @@ function AppContent() {
       .select('*')
       .order('created_at', { ascending: false });
 
-const mappedTools = (toolsData || []).map((tool: any) => ({
-  id: String(tool.id),
-  name: tool.name,
-  url: tool.url,
-  category: tool.category,
-  pricing: tool.pricing,
-  developer: tool.developer,
-  description: tool.short_description,
-  longDescription: tool.long_description,
-  tags: Array.isArray(tool.tags)
-    ? tool.tags
-    : tool.tags
-    ? tool.tags.split(',').map((t: string) => t.trim())
-    : [],
-  upvotes: 1,
-  bookmarks: false,
-  featured: false,
-  logo: 'Sparkles'
-}));
+    const mappedTools = (toolsData || []).map((tool: any) => ({
+      id: String(tool.id),
+      name: tool.name,
+      url: tool.url,
+      category: tool.category,
+      pricing: tool.pricing,
+      developer: tool.developer,
+      description: tool.short_description,
+      longDescription: tool.long_description,
+      tags: Array.isArray(tool.tags)
+        ? tool.tags
+        : tool.tags
+        ? tool.tags.split(',').map((t: string) => t.trim())
+        : [],
+      upvotes: 1,
+      bookmarks: false,
+      featured: false,
+      logo: 'Sparkles'
+    }));
 
-setTools(mappedTools as any);
+    const mappedNews = (newsData || []).map((news: any) => ({
+      id: String(news.id),
+      title: news.title,
+      category: news.category,
+      author: news.author,
+      source: news.source,
+      summary: news.summary,
+      content: news.content,
+      createdAt: news.created_at,
+      upvotes: 1,
+      commentsCount: 0
+    }));
 
-const mappedNews = (newsData || []).map((news: any) => ({
-  id: String(news.id),
-  title: news.title,
-  category: news.category,
-  author: news.author,
-  source: news.source,
-  summary: news.summary,
-  content: news.content,
-  createdAt: news.created_at,
-  upvotes: 1,
-  commentsCount: 0
-}));
-
-setNewsList(mappedNews as any);
+    setTools(mappedTools as any);
+    setNewsList(mappedNews as any);
+  };
 
   fetchData();
 }, []);
