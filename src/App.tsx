@@ -262,8 +262,27 @@ function AppContent() {
       .select('*')
       .order('created_at', { ascending: false });
 
-    setTools((toolsData || []) as any);
-    setNewsList((newsData || []) as any);
+const mappedTools = (toolsData || []).map((tool: any) => ({
+  id: String(tool.id),
+  name: tool.name,
+  url: tool.url,
+  category: tool.category,
+  pricing: tool.pricing,
+  developer: tool.developer,
+  description: tool.short_description,
+  longDescription: tool.long_description,
+  tags: Array.isArray(tool.tags)
+    ? tool.tags
+    : tool.tags
+    ? tool.tags.split(',').map((t: string) => t.trim())
+    : [],
+  upvotes: 1,
+  bookmarks: false,
+  featured: false,
+  logo: 'Sparkles'
+}));
+
+setTools(mappedTools as any);    setNewsList((newsData || []) as any);
   };
 
   fetchData();
