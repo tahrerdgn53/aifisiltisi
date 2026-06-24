@@ -365,7 +365,7 @@ const handleAddNewsSubmit = async (newNews: any) => {
     category: newNews.category,
     author: newNews.author || 'AI Fısıltısı',
     source: newNews.source,
-    summary: newNews.summary,
+    summary: newNews.excerpt,
     content: newNews.content
   };
 
