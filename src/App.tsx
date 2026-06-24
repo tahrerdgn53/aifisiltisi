@@ -23,7 +23,7 @@ import ToolDetailPage from './components/ToolDetailPage';
 import NewsDetailPage from './components/NewsDetailPage';
 import AdminPortalPage from './components/AdminPortalPage';
 
-import { INITIAL_TOOLS, INITIAL_NEWS } from './data';
+import { supabase } from './supabase';
 import { AITool, AINews, Comment } from './types';
 import { Sparkles, ArrowUp, Bot, ExternalLink, Flame, BookmarkCheck, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -250,22 +250,24 @@ function AppContent() {
   };
 
   // Manage data list state and sync with localstorage
-  useEffect(() => {
-    const savedTools = localStorage.getItem('aifisiltisi_tools_v2');
-    const savedNews = localStorage.getItem('aifisiltisi_news_v2');
+ useEffect(() => {
+  const fetchData = async () => {
+    const { data: toolsData } = await supabase
+      .from('tools')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-    if (savedTools) {
-      setTools(JSON.parse(savedTools));
-    } else {
-      setTools(INITIAL_TOOLS);
-    }
+    const { data: newsData } = await supabase
+      .from('articles')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-    if (savedNews) {
-      setNewsList(JSON.parse(savedNews));
-    } else {
-      setNewsList(INITIAL_NEWS);
-    }
-  }, []);
+    setTools((toolsData || []) as any);
+    setNewsList((newsData || []) as any);
+  };
+
+  fetchData();
+}, []);
 
   // Track scroll position to display floats
   useEffect(() => {
@@ -302,30 +304,47 @@ function AppContent() {
     saveNews(updated);
   };
 
-  const handleAddToolSubmit = (newTool: any) => {
-    const formatted: AITool = {
-      ...newTool,
-      id: `tool-${Date.now()}`,
-      upvotes: 1,
-      bookmarks: false,
-      featured: false,
-      developer: newTool.developer || 'AI Fısıltısı',
-      addedByUser: true
-    };
-    const updated = [formatted, ...tools];
-    saveTools(updated);
+ const handleAddToolSubmit = async (newTool: any) => {
+  const formatted = {
+    name: newTool.name,
+    url: newTool.url,
+    category: newTool.category,
+    pricing: newTool.pricing,
+    developer: newTool.developer || 'AI Fısıltısı',
+    short_description: newTool.description,
+    long_description: newTool.longDescription,
+    tags: newTool.tags
   };
 
-  const handleAddNewsSubmit = (newNews: any) => {
-    const formatted: AINews = {
-      ...newNews,
-      id: `news-${Date.now()}`,
-      upvotes: 1,
-      commentsCount: 0
-    };
-    const updated = [formatted, ...newsList];
-    saveNews(updated);
+  await supabase.from('tools').insert([formatted]);
+
+  const { data } = await supabase
+    .from('tools')
+    .select('*')
+    .order('id', { ascending: false });
+
+  setTools((data || []) as any);
+};
+
+const handleAddNewsSubmit = async (newNews: any) => {
+  const formatted = {
+    title: newNews.title,
+    category: newNews.category,
+    author: newNews.author || 'AI Fısıltısı',
+    source: newNews.source,
+    summary: newNews.excerpt,
+    content: newNews.content
   };
+
+  await supabase.from('articles').insert([formatted]);
+
+  const { data } = await supabase
+    .from('articles')
+    .select('*')
+    .order('id', { ascending: false });
+
+  setNewsList((data || []) as any);
+};
 
   const handleDeleteTool = (id: string) => {
     const updated = tools.filter(t => t.id !== id);
