@@ -282,8 +282,22 @@ const mappedTools = (toolsData || []).map((tool: any) => ({
   logo: 'Sparkles'
 }));
 
-setTools(mappedTools as any);    setNewsList((newsData || []) as any);
-  };
+setTools(mappedTools as any);
+
+const mappedNews = (newsData || []).map((news: any) => ({
+  id: String(news.id),
+  title: news.title,
+  category: news.category,
+  author: news.author,
+  source: news.source,
+  summary: news.summary,
+  content: news.content,
+  createdAt: news.created_at,
+  upvotes: 1,
+  commentsCount: 0
+}));
+
+setNewsList(mappedNews as any);
 
   fetchData();
 }, []);
@@ -351,9 +365,31 @@ const handleAddNewsSubmit = async (newNews: any) => {
     category: newNews.category,
     author: newNews.author || 'AI Fısıltısı',
     source: newNews.source,
-    summary: newNews.excerpt,
+    summary: newNews.summary,
     content: newNews.content
   };
+  
+  await supabase.from('articles').insert([formatted]);
+
+  const { data } = await supabase
+  .from('articles')
+  .select('*')
+  .order('created_at', { ascending: false });
+
+const mappedNews = (data || []).map((news: any) => ({
+  id: String(news.id),
+  title: news.title,
+  category: news.category,
+  author: news.author,
+  source: news.source,
+  summary: news.summary,
+  content: news.content,
+  createdAt: news.created_at,
+  upvotes: 1,
+  commentsCount: 0
+}));
+
+setNewsList(mappedNews as any);
 
   await supabase.from('articles').insert([formatted]);
 
