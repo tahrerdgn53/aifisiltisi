@@ -387,7 +387,7 @@ const mappedNews = (data || []).map((news: any) => ({
   createdAt: news.created_at,
   upvotes: 1,
   commentsCount: 0
-})});
+}));
 
 setNewsList(mappedNews as any);
 
