@@ -255,7 +255,7 @@ function AppContent() {
     const { data: toolsData } = await supabase
       .from('tools')
       .select('*')
-      .order('created_at', { ascending: false });
+      .order('id', { ascending: false });
 
     const { data: newsData } = await supabase
       .from('articles')
