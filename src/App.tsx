@@ -30,6 +30,15 @@ import { motion, AnimatePresence } from 'motion/react';
 import { slugify } from './utils';
 
 /* Homepage catalog controller layout element wrapper */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 function HomeLanding({
   tools,
   newsList,
@@ -578,8 +587,9 @@ const handleAddNewsSubmit = async (newNews: any) => {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+   <BrowserRouter>
+  <ScrollToTop />
+  <AppContent />
+</BrowserRouter>
   );
 }
