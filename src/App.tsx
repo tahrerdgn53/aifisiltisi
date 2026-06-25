@@ -262,25 +262,25 @@ useEffect(() => {
       .select('*')
       .order('created_at', { ascending: false });
 
-    const mappedTools = (toolsData || []).map((tool: any) => ({
-      id: String(tool.id),
-      name: tool.name,
-      url: tool.url,
-      category: tool.category,
-      pricing: tool.pricing,
-      developer: tool.developer,
-      description: tool.short_description,
-      longDescription: tool.long_description,
-      tags: Array.isArray(tool.tags)
-        ? tool.tags
-        : tool.tags
-        ? tool.tags.split(',').map((t: string) => t.trim())
-        : [],
-      upvotes: 1,
-      bookmarks: false,
-      featured: false,
-      logo: 'Sparkles'
-    }));
+   const mappedTools = (toolsData || []).map((tool: any) => ({
+  id: String(tool.id),
+  name: tool.name,
+  url: tool.url,
+  category: tool.category,
+  pricing: tool.pricing,
+  developer: tool.developer,
+  description: tool.short_description,
+  longDescription: tool.long_description,
+  tags: Array.isArray(tool.tags)
+    ? tool.tags
+    : tool.tags
+    ? tool.tags.split(',').map((t: string) => t.trim())
+    : [],
+  upvotes: 1,
+  bookmarks: false,
+  featured: false,
+  logo: 'Sparkles'
+}));
 
     const mappedNews = (newsData || []).map((news: any) => ({
       id: String(news.id),
@@ -358,7 +358,27 @@ useEffect(() => {
     .select('*')
     .order('id', { ascending: false });
 
-  setTools((data || []) as any);
+  const mappedTools = (data || []).map((tool: any) => ({
+  id: String(tool.id),
+  name: tool.name,
+  url: tool.url,
+  category: tool.category,
+  pricing: tool.pricing,
+  developer: tool.developer,
+  description: tool.short_description,
+  longDescription: tool.long_description,
+  tags: Array.isArray(tool.tags)
+    ? tool.tags
+    : tool.tags
+    ? tool.tags.split(',').map((t: string) => t.trim())
+    : [],
+  upvotes: 1,
+  bookmarks: false,
+  featured: false,
+  logo: 'Sparkles'
+}));
+
+setTools(mappedTools as any);
 };
 
 const handleAddNewsSubmit = async (newNews: any) => {
