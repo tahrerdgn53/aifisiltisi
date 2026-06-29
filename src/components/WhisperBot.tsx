@@ -133,7 +133,7 @@ const findMatchingTools = (query: string) => {
     })
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 4);
+    .sort((a, b) => b.score - a.score);
 
   return scoredTools.map((item) => item.tool);
 };
