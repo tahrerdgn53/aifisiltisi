@@ -6,7 +6,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Bot, X, Send, Trash2, HelpCircle, AudioLines, Minimize2 } from 'lucide-react';
-import { LOCAL_WHISPER_RESPONSES, fallback_whisper } from '../data';
+import { supabase } from '../supabase';
 
 interface WhisperBotProps {
   isOpen: boolean;
