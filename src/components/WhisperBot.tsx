@@ -71,8 +71,39 @@ export default function WhisperBot({ isOpen, onClose }: WhisperBotProps) {
   return tags || '';
 };
 
+const detectIntentCategory = (query: string) => {
+  const q = query.toLowerCase();
+
+  if (['video', 'reels', 'shorts', 'tiktok', 'klip', 'animasyon'].some(k => q.includes(k))) {
+    return 'video';
+  }
+
+  if (['ses', 'voice', 'audio', 'dublaj', 'seslendirme'].some(k => q.includes(k))) {
+    return 'voice';
+  }
+
+  if (['müzik', 'şarkı', 'beste', 'vokal'].some(k => q.includes(k))) {
+    return 'music';
+  }
+
+  if (['kod', 'yazılım', 'uygulama', 'site', 'web', 'programlama'].some(k => q.includes(k))) {
+    return 'code';
+  }
+
+  if (['görsel', 'resim', 'logo', 'tasarım', 'afiş', 'poster'].some(k => q.includes(k))) {
+    return 'image';
+  }
+
+  if (['sunum', 'slayt', 'presentation'].some(k => q.includes(k))) {
+    return 'presentation';
+  }
+
+  return null;
+};
+
 const findMatchingTools = (query: string) => {
   const q = query.toLowerCase();
+  const intentCategory = detectIntentCategory(q);
 
   const scoredTools = tools
     .map((tool) => {
@@ -87,6 +118,10 @@ const findMatchingTools = (query: string) => {
       `.toLowerCase();
 
       let score = 0;
+
+      if (intentCategory && tool.category?.toLowerCase().includes(intentCategory)) {
+        score += 10;
+      }
 
       q.split(' ')
         .filter((word) => word.length > 2)
