@@ -66,6 +66,43 @@ export default function WhisperBot({ isOpen, onClose }: WhisperBotProps) {
     }
   }, [messages, isTyping]);
 
+  const normalizeTags = (tags: ToolItem['tags']) => {
+  if (Array.isArray(tags)) return tags.join(' ');
+  return tags || '';
+};
+
+const findMatchingTools = (query: string) => {
+  const q = query.toLowerCase();
+
+  const scoredTools = tools
+    .map((tool) => {
+      const haystack = `
+        ${tool.name}
+        ${tool.category}
+        ${tool.pricing}
+        ${tool.developer}
+        ${tool.short_description}
+        ${tool.long_description}
+        ${normalizeTags(tool.tags)}
+      `.toLowerCase();
+
+      let score = 0;
+
+      q.split(' ')
+        .filter((word) => word.length > 2)
+        .forEach((word) => {
+          if (haystack.includes(word)) score += 1;
+        });
+
+      return { tool, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 4);
+
+  return scoredTools.map((item) => item.tool);
+};
+  
   const handleSendMessage = (textToSend: string) => {
     if (!textToSend.trim()) return;
 
