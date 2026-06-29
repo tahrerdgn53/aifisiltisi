@@ -120,20 +120,23 @@ const findMatchingTools = (query: string) => {
 
     // Calculate Bot Answer
     setTimeout(() => {
-      const lowerText = textToSend.toLowerCase();
-      let matchedReply = '';
+     const matchedTools = findMatchingTools(textToSend);
 
-      // Run keyword scan
-      for (const group of LOCAL_WHISPER_RESPONSES) {
-        if (group.keywords.some(k => lowerText.includes(k))) {
-          matchedReply = group.reply;
-          break;
-        }
-      }
+let matchedReply = '';
 
-      if (!matchedReply) {
-        matchedReply = fallback_whisper;
-      }
+if (matchedTools.length > 0) {
+  matchedReply =
+    `Sana uygun olabilecek araçları buldum:\n\n` +
+    matchedTools
+      .map((tool, index) => {
+        return `${index + 1}. **${tool.name}**\n${tool.short_description || 'Bu araç ihtiyacına uygun olabilir.'}\nKategori: ${tool.category} | Ücret: ${tool.pricing}`;
+      })
+      .join('\n\n') +
+    `\n\nDetay için araç adını katalogda aratabilir veya kartına tıklayabilirsin.`;
+} else {
+  matchedReply =
+    'Bu isteğe tam uyan bir araç bulamadım ama daha net yazarsan yardımcı olabilirim. Örneğin: “video üretmek istiyorum”, “kod yazmak istiyorum”, “logo tasarlamak istiyorum” gibi fısıldayabilirsin.';
+}
 
       const botMsg: Message = {
         id: Math.random().toString(),
