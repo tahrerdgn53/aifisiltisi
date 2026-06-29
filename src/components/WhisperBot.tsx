@@ -20,6 +20,18 @@ interface Message {
   timestamp: string;
 }
 
+interface ToolItem {
+  id: string;
+  name: string;
+  url: string;
+  category: string;
+  pricing: string;
+  developer: string;
+  short_description: string;
+  long_description: string;
+  tags: string[] | string | null;
+}
+
 export default function WhisperBot({ isOpen, onClose }: WhisperBotProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -30,10 +42,24 @@ export default function WhisperBot({ isOpen, onClose }: WhisperBotProps) {
     }
   ]);
   const [inputValue, setInputValue] = useState('');
+  const [tools, setTools] = useState<ToolItem[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Auto scroll to bottom
+  useEffect(() => {
+  const fetchTools = async () => {
+    const { data } = await supabase
+      .from('tools')
+      .select('*');
+
+    if (data) {
+      setTools(data as ToolItem[]);
+    }
+  };
+
+  fetchTools();
+}, []);
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
