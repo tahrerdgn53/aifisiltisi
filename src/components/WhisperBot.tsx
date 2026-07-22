@@ -18,6 +18,7 @@ interface Message {
   sender: 'user' | 'bot';
   text: string;
   timestamp: string;
+  tools?: ToolItem[];
 }
 
 interface ToolItem {
@@ -174,12 +175,15 @@ if (matchedTools.length > 0) {
 }
 
       const botMsg: Message = {
-        id: Math.random().toString(),
-        sender: 'bot',
-        text: matchedReply,
-        timestamp: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
-      };
-
+  id: Math.random().toString(),
+  sender: 'bot',
+  text: matchedReply,
+  tools: matchedTools,
+  timestamp: new Date().toLocaleTimeString('tr-TR', {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+};
       setMessages(prev => [...prev, botMsg]);
       setIsTyping(false);
     }, 900);
@@ -280,6 +284,7 @@ if (matchedTools.length > 0) {
                         index % 2 === 1 ? <strong key={index} className="text-cyan-300 font-semibold">{part}</strong> : part
                       )}
                     </p>
+                    
                     <span className="block text-right text-[10px] text-slate-500 font-mono mt-1.5">
                       {msg.timestamp}
                     </span>
