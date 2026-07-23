@@ -106,7 +106,13 @@ const findMatchingTools = (query: string) => {
   const q = query.toLowerCase();
   const intentCategory = detectIntentCategory(q);
 
-  const scoredTools = tools
+  const toolsToScore = intentCategory
+    ? tools.filter((tool) =>
+        tool.category?.toLowerCase().includes(intentCategory)
+      )
+    : tools;
+
+  const scoredTools = toolsToScore
     .map((tool) => {
       const haystack = `
         ${tool.name}
@@ -120,20 +126,30 @@ const findMatchingTools = (query: string) => {
 
       let score = 0;
 
-      if (intentCategory && tool.category?.toLowerCase().includes(intentCategory)) {
+      if (
+        intentCategory &&
+        tool.category?.toLowerCase().includes(intentCategory)
+      ) {
         score += 10;
       }
 
-      q.split(' ')
+      q.split(" ")
         .filter((word) => word.length > 2)
         .forEach((word) => {
-          if (haystack.includes(word)) score += 1;
+          if (haystack.includes(word)) {
+            score += 1;
+          }
         });
 
       return { tool, score };
     })
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score)
+    .filter((item) => {
+      if (intentCategory) {
+        return true;
+      }
+
+      return item.score > 0;
+    })
     .sort((a, b) => b.score - a.score);
 
   return scoredTools.map((item) => item.tool);
