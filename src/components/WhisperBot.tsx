@@ -300,6 +300,33 @@ if (matchedTools.length > 0) {
                         index % 2 === 1 ? <strong key={index} className="text-cyan-300 font-semibold">{part}</strong> : part
                       )}
                     </p>
+
+                    {msg.tools && msg.tools.length > 0 && (
+  <div className="mt-4 space-y-3">
+    {msg.tools.map((tool) => (
+      <div
+        key={tool.id}
+        className="rounded-xl border border-white/10 bg-slate-900/40 p-4 hover:border-cyan-400/40 transition-all"
+      >
+        <h4 className="text-white font-semibold">{tool.name}</h4>
+
+        <p className="mt-1 text-sm text-slate-300">
+          {tool.short_description}
+        </p>
+
+        <div className="mt-3 flex gap-2 flex-wrap text-xs">
+          <span className="rounded-full bg-cyan-500/15 px-2 py-1 text-cyan-300">
+            {tool.category}
+          </span>
+
+          <span className="rounded-full bg-emerald-500/15 px-2 py-1 text-emerald-300">
+            {tool.pricing}
+          </span>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
                     
                     <span className="block text-right text-[10px] text-slate-500 font-mono mt-1.5">
                       {msg.timestamp}
