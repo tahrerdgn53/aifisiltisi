@@ -344,7 +344,7 @@ if (matchedTools.length > 0) {
               ))}
 
               {isTyping && (
-                <div ="flex justify-start">
+                <div className="flex justify-start">
                   <div className="bg-white/[0.03] border border-white/5 rounded-2xl rounded-tl-none px-4 py-3.5">
                     <div className="flex space-x-1.5 items-center">
                       <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce delay-100"></span>
