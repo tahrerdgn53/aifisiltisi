@@ -172,22 +172,17 @@ const findMatchingTools = (query: string) => {
 
     // Calculate Bot Answer
     setTimeout(() => {
-     const matchedTools = findMatchingTools(textToSend);
+    const matchedTools = findMatchingTools(textToSend);
 
 let matchedReply = '';
 
 if (matchedTools.length > 0) {
   matchedReply =
-    `Sana uygun olabilecek araçları buldum:\n\n` +
-    matchedTools
-      .map((tool, index) => {
-        return `${index + 1}. **${tool.name}**\n${tool.short_description || 'Bu araç ihtiyacına uygun olabilir.'}\nKategori: ${tool.category} | Ücret: ${tool.pricing}`;
-      })
-      .join('\n\n') +
-    `\n\nDetay için araç adını katalogda aratabilir veya kartına tıklayabilirsin.`;
+    '🎯 Sana uygun olabilecek araçları buldum.\n\n' +
+    'Aşağıdaki kartlardan detaylarını inceleyebilirsin.';
 } else {
   matchedReply =
-    'Bu isteğe tam uyan bir araç bulamadım ama daha net yazarsan yardımcı olabilirim. Örneğin: “video üretmek istiyorum”, “kod yazmak istiyorum”, “logo tasarlamak istiyorum” gibi fısıldayabilirsin.';
+    'Bu isteğe tam uyan bir araç bulamadım ama daha net yazarsan yardımcı olabilirim. Örneğin: “video üretmek istiyorum”, “kod yazmak istiyorum”, “logo tasarlamak istiyorum” gibi yazabilirsin.';
 }
 
       const botMsg: Message = {
