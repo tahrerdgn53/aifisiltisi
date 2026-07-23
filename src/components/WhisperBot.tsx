@@ -298,10 +298,15 @@ if (matchedTools.length > 0) {
 
                     {msg.tools && msg.tools.length > 0 && (
   <div className="mt-4 space-y-3">
+    {msg.tools && msg.tools.length > 0 && (
+  <div className="mt-4 space-y-3">
     {msg.tools.map((tool) => (
-      <div
+      <a
         key={tool.id}
-        className="rounded-xl border border-white/10 bg-slate-900/40 p-4 hover:border-cyan-400/40 transition-all"
+        href={tool.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block rounded-xl border border-white/10 bg-slate-900/40 p-4 hover:border-cyan-400/40 hover:bg-slate-900/70 hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/10 transition-all cursor-pointer"
       >
         <h4 className="text-white font-semibold">{tool.name}</h4>
 
@@ -318,12 +323,20 @@ if (matchedTools.length > 0) {
             {tool.pricing}
           </span>
         </div>
-      </div>
+        <div className="mt-4 flex justify-end">
+  <span className="inline-flex items-center rounded-lg bg-cyan-500/10 px-3 py-1.5 text-sm font-medium text-cyan-300 transition group-hover:bg-cyan-500/20">
+    İncele
+    <span className="ml-2 transition-transform group-hover:translate-x-1">
+      →
+    </span>
+  </span>
+</div>
+      </a>
     ))}
   </div>
 )}
                     
-                    <span className="block text-right text-[10px] text-slate-500 font-mono mt-1.5">
+                    <span ="block text-right text-[10px] text-slate-500 font-mono mt-1.5">
                       {msg.timestamp}
                     </span>
                   </div>
@@ -331,7 +344,7 @@ if (matchedTools.length > 0) {
               ))}
 
               {isTyping && (
-                <div className="flex justify-start">
+                <div ="flex justify-start">
                   <div className="bg-white/[0.03] border border-white/5 rounded-2xl rounded-tl-none px-4 py-3.5">
                     <div className="flex space-x-1.5 items-center">
                       <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce delay-100"></span>
