@@ -296,9 +296,7 @@ if (matchedTools.length > 0) {
                       )}
                     </p>
 
-                    {msg.tools && msg.tools.length > 0 && (
-  <div className="mt-4 space-y-3">
-    {msg.tools && msg.tools.length > 0 && (
+                   {msg.tools && msg.tools.length > 0 && (
   <div className="mt-4 space-y-3">
     {msg.tools.map((tool) => (
       <a
@@ -323,14 +321,15 @@ if (matchedTools.length > 0) {
             {tool.pricing}
           </span>
         </div>
+
         <div className="mt-4 flex justify-end">
-  <span className="inline-flex items-center rounded-lg bg-cyan-500/10 px-3 py-1.5 text-sm font-medium text-cyan-300 transition group-hover:bg-cyan-500/20">
-    İncele
-    <span className="ml-2 transition-transform group-hover:translate-x-1">
-      →
-    </span>
-  </span>
-</div>
+          <span className="inline-flex items-center rounded-lg bg-cyan-500/10 px-3 py-1.5 text-sm font-medium text-cyan-300 transition group-hover:bg-cyan-500/20">
+            İncele
+            <span className="ml-2 transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </span>
+        </div>
       </a>
     ))}
   </div>
