@@ -336,7 +336,7 @@ if (matchedTools.length > 0) {
   </div>
 )}
                     
-                    <span ="block text-right text-[10px] text-slate-500 font-mono mt-1.5">
+                    <span className="block text-right text-[10px] text-slate-500 font-mono mt-1.5">
                       {msg.timestamp}
                     </span>
                   </div>
