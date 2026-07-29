@@ -312,6 +312,44 @@ export default function ToolDetailPage({
   </div>
 </section>
 
+            {/* Target Audience */}
+<section className="rounded-3xl border border-white/5 bg-white/[0.01] p-6 sm:p-8">
+  <div className="mb-6">
+    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-400">
+      Doğru Kullanıcıyı Bul
+    </span>
+
+    <h2 className="mt-2 text-2xl font-black tracking-tight text-white">
+      Kimler İçin Uygun?
+    </h2>
+
+    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">
+      {tool.name}, özellikle aşağıdaki kullanıcı profilleri için değerlendirilebilir.
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {tool.tags.slice(0, 4).map((tag, index) => (
+      <div
+        key={`${tag}-${index}`}
+        className="rounded-2xl border border-white/5 bg-slate-950/50 p-5 transition hover:border-cyan-400/20 hover:bg-slate-950/80"
+      >
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/10 text-cyan-300">
+          <User className="h-5 w-5" />
+        </div>
+
+        <h3 className="mt-4 text-sm font-bold capitalize text-white">
+          {tag}
+        </h3>
+
+        <p className="mt-2 text-xs leading-relaxed text-slate-500">
+          {tool.name} ile {tag.toLowerCase()} odaklı süreçlerini geliştirmek isteyen kullanıcılar.
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+
             {/* Live Interactive Comments Area */}
             <div className="p-6 sm:p-8 bg-white/[0.01] border border-white/5 rounded-3xl space-y-6">
               <h3 className="text-sm font-bold text-white tracking-widest uppercase font-mono border-b border-white/5 pb-3 flex items-center space-x-2">
