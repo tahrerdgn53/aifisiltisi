@@ -11,6 +11,7 @@ import ToolGrid from './components/ToolGrid';
 import NewsSection from './components/NewsSection';
 import WhisperBot from './components/WhisperBot';
 import Footer from './components/Footer';
+import LiveStats from './components/LiveStats';
 
 // Static corporate routed views
 import AboutPage from './components/AboutPage';
@@ -82,6 +83,18 @@ function HomeLanding({
           setTimeout(() => handleScrollToSection('explore'), 50);
         }}
       />
+      
+  <LiveStats
+  toolCount={tools.length}
+  articleCount={newsList.length}
+  categoryCount={
+    new Set(
+      tools
+        .map((tool) => tool.category)
+        .filter(Boolean)
+    ).size
+  }
+/>
 
       {/* Main Grid & Contents with Tab Switcher */}
       <main className="relative z-10 flex-grow">
