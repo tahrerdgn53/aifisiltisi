@@ -20,6 +20,7 @@ export interface AITool {
   pricing: 'Ücretsiz' | 'Freemium' | 'Ücretli';
 
   // Araç detay sayfası 2.0
+  editorReview?: string;
   targetAudience?: string[];
   useCases?: string[];
   pros?: string[];
