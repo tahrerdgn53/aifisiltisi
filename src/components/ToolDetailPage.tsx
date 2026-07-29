@@ -335,23 +335,6 @@ export default function ToolDetailPage({
           {/* RIGHT: Sponsored layout and Affiliate Sidebar panels (4 cols) */}
           <div className="space-y-6">
 
-            {/* AFFILIATE Banner spot */}
-            <div className="p-6 bg-white/[0.01] border border-white/5 rounded-3xl space-y-4">
-              <span className="text-[8px] bg-indigo-500/20 text-indigo-300 font-bold px-2 py-0.5 rounded uppercase tracking-widest font-mono">
-                ORTAKLIK PROGRAMI
-              </span>
-              <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono">Sizin de bir AI Aracınız mı Var?</h4>
-              <p className="text-xs text-slate-400 leading-relaxed font-light">
-                Girişiminizi her gün binlerce yenilikçi profesyonel ve geliştirici ile buluşturmak için bizimle iletişime geçin.
-              </p>
-              <Link
-                to="/contact"
-                className="block text-center text-xs text-cyan-400 hover:text-cyan-300 font-semibold border border-cyan-500/20 hover:border-cyan-500/40 rounded-xl py-2.5 bg-cyan-500/5 transition"
-              >
-                Bilgi Al ve Sponsor Ol
-              </Link>
-            </div>
-
           {/* Premium Related Tools */}
 <section className="rounded-3xl border border-white/5 bg-white/[0.01] p-6 sm:p-8">
   <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
