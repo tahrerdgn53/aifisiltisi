@@ -10,7 +10,7 @@ export interface AITool {
   longDescription?: string;
   category: string;
   url: string;
-  logo: string; // Icon identifier or Emoji
+  logo: string;
   upvotes: number;
   bookmarks: boolean;
   tags: string[];
@@ -18,6 +18,16 @@ export interface AITool {
   addedByUser?: boolean;
   developer?: string;
   pricing: 'Ücretsiz' | 'Freemium' | 'Ücretli';
+
+  // Araç detay sayfası 2.0
+  targetAudience?: string[];
+  useCases?: string[];
+  pros?: string[];
+  cons?: string[];
+
+  // SEO alanları
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 export interface AINews {
