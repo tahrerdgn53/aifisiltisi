@@ -350,6 +350,46 @@ export default function ToolDetailPage({
   </div>
 </section>
 
+            {/* Use Cases */}
+<section className="rounded-3xl border border-white/5 bg-white/[0.01] p-6 sm:p-8">
+  <div className="mb-6">
+    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-400">
+      Neler Yapabilirsiniz?
+    </span>
+
+    <h2 className="mt-2 text-2xl font-black tracking-tight text-white">
+      Kullanım Alanları
+    </h2>
+
+    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">
+      {tool.name}, aşağıdaki görev ve üretim süreçlerinde kullanılabilir.
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {tool.tags.slice(0, 6).map((tag, index) => (
+      <div
+        key={`${tag}-${index}`}
+        className="group flex items-start gap-4 rounded-2xl border border-white/5 bg-slate-950/50 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-400/25 hover:bg-slate-950/80"
+      >
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-indigo-400/20 bg-indigo-500/10 text-indigo-300">
+          <Check className="h-5 w-5" />
+        </div>
+
+        <div>
+          <h3 className="text-sm font-bold capitalize text-white">
+            {tag}
+          </h3>
+
+          <p className="mt-2 text-xs leading-relaxed text-slate-500">
+            {tool.name} ile {tag.toLowerCase()} odaklı çalışmalarınızı daha hızlı ve verimli şekilde gerçekleştirebilirsiniz.
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
             {/* Live Interactive Comments Area */}
             <div className="p-6 sm:p-8 bg-white/[0.01] border border-white/5 rounded-3xl space-y-6">
               <h3 className="text-sm font-bold text-white tracking-widest uppercase font-mono border-b border-white/5 pb-3 flex items-center space-x-2">
