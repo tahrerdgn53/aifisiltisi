@@ -418,6 +418,43 @@ seoDescription: tool.seo_description,
 setTools(mappedTools as any);
 };
 
+  const handleUpdateTool = async (updatedTool: AITool) => {
+  const formatted = {
+    name: updatedTool.name,
+    url: updatedTool.url,
+    category: updatedTool.category,
+    pricing: updatedTool.pricing,
+    developer: updatedTool.developer || 'AI Fısıltısı',
+    short_description: updatedTool.description,
+    long_description: updatedTool.longDescription,
+    tags: updatedTool.tags,
+    editor_review: updatedTool.editorReview || null,
+    target_audience: updatedTool.targetAudience || [],
+    use_cases: updatedTool.useCases || [],
+    pros: updatedTool.pros || [],
+    cons: updatedTool.cons || [],
+    seo_title: updatedTool.seoTitle || null,
+    seo_description: updatedTool.seoDescription || null,
+  };
+
+  const { error } = await supabase
+    .from('tools')
+    .update(formatted)
+    .eq('id', updatedTool.id);
+
+  if (error) {
+    alert('Araç güncellenemedi: ' + error.message);
+    console.error('Tool update error:', error);
+    return;
+  }
+
+  setTools((currentTools) =>
+    currentTools.map((tool) =>
+      tool.id === updatedTool.id ? updatedTool : tool
+    )
+  );
+};
+  
 const handleAddNewsSubmit = async (newNews: any) => {
   const formatted = {
     title: newNews.title,
