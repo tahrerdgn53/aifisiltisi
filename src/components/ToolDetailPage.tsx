@@ -266,6 +266,52 @@ export default function ToolDetailPage({
               </div>
             </div>
 
+            {/* AI Fısıltısı Editorial Review */}
+<section className="relative overflow-hidden rounded-3xl border border-cyan-500/15 bg-gradient-to-br from-cyan-950/20 via-white/[0.015] to-indigo-950/10 p-6 sm:p-8">
+  <div className="pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-cyan-500/10 blur-3xl" />
+
+  <div className="relative">
+    <div className="flex items-start gap-4">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-500/10 text-cyan-300">
+        <Sparkles className="h-5 w-5" />
+      </div>
+
+      <div>
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-400">
+          Editör Değerlendirmesi
+        </span>
+
+        <h2 className="mt-2 text-xl font-black tracking-tight text-white sm:text-2xl">
+          Aİ Fısıltısı’nın {tool.name} Yorumu
+        </h2>
+      </div>
+    </div>
+
+    <div className="mt-6 border-t border-white/5 pt-6">
+      <p className="text-sm leading-7 text-slate-300 sm:text-base">
+        {tool.name}, {tool.category.toLowerCase()} kategorisinde çözüm arayan
+        kullanıcılar için dikkat çeken seçeneklerden biridir.{' '}
+        {tool.description} Kullanım amacı, bütçe ve ihtiyaç duyulan özellikler
+        değerlendirilerek tercih edilmesi önerilir.
+      </p>
+    </div>
+
+    <div className="mt-6 flex flex-wrap gap-2">
+      <span className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-300">
+        Kullanıcı dostu
+      </span>
+
+      <span className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1.5 text-xs font-semibold text-cyan-300">
+        {tool.pricing}
+      </span>
+
+      <span className="rounded-full border border-indigo-400/20 bg-indigo-500/10 px-3 py-1.5 text-xs font-semibold text-indigo-300">
+        {tool.category}
+      </span>
+    </div>
+  </div>
+</section>
+
             {/* Live Interactive Comments Area */}
             <div className="p-6 sm:p-8 bg-white/[0.01] border border-white/5 rounded-3xl space-y-6">
               <h3 className="text-sm font-bold text-white tracking-widest uppercase font-mono border-b border-white/5 pb-3 flex items-center space-x-2">
