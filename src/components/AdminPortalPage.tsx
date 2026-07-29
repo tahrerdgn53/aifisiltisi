@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Lock, Unlock, LogOut, Trash2, LayoutGrid, Newspaper, Inbox, AlertTriangle, Info } from 'lucide-react';
+import { Lock, Unlock, LogOut, Trash2, Pencil, LayoutGrid, Newspaper, Inbox, AlertTriangle, Info } from 'lucide-react';
 import { AITool, AINews } from '../types';
 import SubmitForm from './SubmitForm';
 
@@ -36,7 +36,7 @@ export default function AdminPortalPage({
 }: AdminPortalPageProps) {
   const [passcodeInput, setPasscodeInput] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [activeSubTab, setActiveSubTab] = useState<'create' | 'manage_tools' | 'manage_news'>('create');
+  const [editingToolId, setEditingToolId] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = "Sistem Yönetim Paneli - AIFısıltısı";
@@ -232,17 +232,39 @@ export default function AdminPortalPage({
                           </div>
                         </div>
 
-                        <button
-                          onClick={() => {
-                            if (window.confirm(`${t.name} aracını kalıcı olarak silmek istediğinize emin misiniz?`)) {
-                              onDeleteTool(t.id);
-                            }
-                          }}
-                          className="flex items-center space-x-1 p-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/25 rounded-xl transition cursor-pointer"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                          <span className="hidden sm:inline font-mono text-[9px]">SİL</span>
-                        </button>
+                        <div className="flex items-center space-x-2 flex-shrink-0">
+  <button
+    onClick={() =>
+      setEditingToolId(editingToolId === t.id ? null : t.id)
+    }
+    className={`flex items-center space-x-1 p-2 border rounded-xl transition cursor-pointer ${
+      editingToolId === t.id
+        ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40'
+        : 'bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border-cyan-500/25'
+    }`}
+  >
+    <Pencil className="w-3.5 h-3.5" />
+    <span className="hidden sm:inline font-mono text-[9px]">
+      {editingToolId === t.id ? 'KAPAT' : 'DÜZENLE'}
+    </span>
+  </button>
+
+  <button
+    onClick={() => {
+      if (
+        window.confirm(
+          `${t.name} aracını kalıcı olarak silmek istediğinize emin misiniz?`
+        )
+      ) {
+        onDeleteTool(t.id);
+      }
+    }}
+    className="flex items-center space-x-1 p-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/25 rounded-xl transition cursor-pointer"
+  >
+    <Trash2 className="w-3.5 h-3.5" />
+    <span className="hidden sm:inline font-mono text-[9px]">SİL</span>
+  </button>
+</div>
                       </div>
                     ))}
                   </div>
