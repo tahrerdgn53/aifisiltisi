@@ -66,34 +66,6 @@ export default function Hero({ onExploreClick }: HeroProps) {
         </button>
       </motion.div>
 
-      {/* Under-hero Mini Live Ticker stats */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="w-full max-w-5xl border border-white/5 bg-white/[0.01] backdrop-blur-sm p-4 sm:p-5 rounded-2xl flex flex-wrap gap-4 items-center justify-around text-slate-400 font-mono text-xs"
-      >
-        <div className="flex items-center space-x-2">
-          <Cpu className="w-4 h-4 text-cyan-400" />
-          <span>Filtrelenebilir: <strong className="text-white">60+ AI Araç</strong></span>
-        </div>
-        <div className="hidden sm:block text-white/10">|</div>
-        <div className="flex items-center space-x-2">
-          <ImageIcon className="w-4 h-4 text-purple-400" />
-          <span>Tasarım Zenginliği: <strong className="text-white">Hiper-Gerçekçilik</strong></span>
-        </div>
-        <div className="hidden sm:block text-white/10">|</div>
-        <div className="flex items-center space-x-2">
-          <Volume2 className="w-4 h-4 text-indigo-400" />
-          <span>Etiket Erişimi: <strong className="text-white">Tek Tıkla Filtre</strong></span>
-        </div>
-        <div className="hidden sm:block text-white/10">|</div>
-        <div className="flex items-center space-x-2">
-          <TrendingUp className="w-4 h-4 text-emerald-400" />
-          <span>En Çok Tercih Edilen: <strong className="text-white">Cursor AI</strong></span>
-        </div>
-      </motion.div>
-
     </section>
   );
 }
