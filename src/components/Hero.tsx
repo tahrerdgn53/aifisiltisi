@@ -13,7 +13,7 @@ interface HeroProps {
 
 export default function Hero({ onExploreClick }: HeroProps) {
   return (
-    <section id="hero" className="relative min-h-[70vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden py-16 sm:py-24">
+    <section id="hero" className="relative flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-16 pb-6 sm:pt-20 sm:pb-8">
       
       {/* Decorative Blur Spheres */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-indigo-500/10 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none -z-10 animate-pulse duration-[6000ms]"></div>
