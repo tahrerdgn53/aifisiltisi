@@ -120,10 +120,10 @@ export default function ToolDetailPage({
         </div>
 
         {/* Master details section grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="space-y-10">
           
           {/* LEFT: Broad specs and commentary (8 cols) */}
-          <div className="lg:col-span-8 space-y-8">
+          <div className="space-y-8">
             
      {/* Premium Tool Hero */}
 <section className="relative overflow-hidden rounded-3xl border border-cyan-500/15 bg-gradient-to-br from-white/[0.04] via-white/[0.015] to-cyan-950/10 p-6 sm:p-9 shadow-2xl shadow-cyan-950/20">
@@ -333,34 +333,7 @@ export default function ToolDetailPage({
           </div>
 
           {/* RIGHT: Sponsored layout and Affiliate Sidebar panels (4 cols) */}
-          <div className="lg:col-span-4 space-y-6">
-            
-            {/* SPONSOR banner block */}
-            <div className="p-6 bg-gradient-to-br from-indigo-950/10 to-indigo-900/10 border border-cyan-500/20 rounded-3xl relative overflow-hidden shadow-xl">
-              <span className="absolute -top-3 -right-3 w-20 h-20 bg-cyan-400/10 rounded-full blur-xl animate-pulse" />
-              
-              <div className="relative space-y-4">
-                <span className="text-[8px] bg-cyan-500/25 border border-cyan-500/30 text-cyan-400 font-bold px-2 py-0.5 rounded uppercase tracking-widest font-mono">
-                  SPONSORLU İÇERİK
-                </span>
-                
-                <h4 className="text-base font-extrabold text-white tracking-tight">Haftanın AI Aracı</h4>
-                <p className="text-xs text-slate-300 font-light leading-relaxed">
-                  İşinizi otonom hale getirmek için geliştirilen en dinamik yapay zeka entegrasyonu. AIFısıltısı referansı ile hemen ücretsiz deneyin.
-                </p>
-
-                <div className="pt-2">
-                  <a
-                    href="https://cursor.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full text-center block px-4 py-2.5 bg-cyan-400 hover:bg-cyan-500 text-slate-950 font-black text-xs rounded-xl transition"
-                  >
-                    Hemen Keşfet ($20 Bonus)
-                  </a>
-                </div>
-              </div>
-            </div>
+          <div className="space-y-6">
 
             {/* AFFILIATE Banner spot */}
             <div className="p-6 bg-white/[0.01] border border-white/5 rounded-3xl space-y-4">
