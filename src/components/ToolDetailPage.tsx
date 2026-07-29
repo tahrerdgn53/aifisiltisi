@@ -390,6 +390,81 @@ export default function ToolDetailPage({
   </div>
 </section>
 
+            {/* Pros and Cons */}
+<section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+  {/* Pros */}
+  <div className="rounded-3xl border border-emerald-400/10 bg-emerald-950/10 p-6 sm:p-8">
+    <div className="mb-6 flex items-start gap-4">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-emerald-400/20 bg-emerald-500/10 text-emerald-300">
+        <Check className="h-5 w-5" />
+      </div>
+
+      <div>
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-400">
+          Güçlü Yönler
+        </span>
+
+        <h2 className="mt-2 text-2xl font-black tracking-tight text-white">
+          Avantajları
+        </h2>
+      </div>
+    </div>
+
+    <div className="space-y-3">
+      {[
+        `${tool.name}, ${tool.category.toLowerCase()} odaklı ihtiyaçlara hızlı çözümler sunar.`,
+        'Kullanıcı dostu yapısıyla yeni başlayanların adapte olmasını kolaylaştırır.',
+        `${tool.pricing} fiyatlandırma modeliyle farklı bütçelere hitap eder.`,
+        'Üretim ve iş akışlarında zaman kazandırmaya yardımcı olabilir.',
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="flex items-start gap-3 rounded-2xl border border-emerald-400/10 bg-slate-950/40 p-4"
+        >
+          <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+          <p className="text-sm leading-relaxed text-slate-300">{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Cons */}
+  <div className="rounded-3xl border border-rose-400/10 bg-rose-950/10 p-6 sm:p-8">
+    <div className="mb-6 flex items-start gap-4">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-rose-400/20 bg-rose-500/10 text-rose-300">
+        <AlertCircle className="h-5 w-5" />
+      </div>
+
+      <div>
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-rose-400">
+          Dikkat Edilmesi Gerekenler
+        </span>
+
+        <h2 className="mt-2 text-2xl font-black tracking-tight text-white">
+          Dezavantajları
+        </h2>
+      </div>
+    </div>
+
+    <div className="space-y-3">
+      {[
+        'Ücretsiz kullanımda bazı özellikler veya kullanım limitleri kısıtlı olabilir.',
+        'En iyi sonuçları almak için doğru komutlar ve kısa bir öğrenme süreci gerekebilir.',
+        'Üretilen içeriklerin doğruluğu ve kalitesi kullanıcı tarafından kontrol edilmelidir.',
+        'Bazı gelişmiş özellikler yalnızca ücretli planlarda sunulabilir.',
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="flex items-start gap-3 rounded-2xl border border-rose-400/10 bg-slate-950/40 p-4"
+        >
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-rose-400" />
+          <p className="text-sm leading-relaxed text-slate-300">{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
             {/* Live Interactive Comments Area */}
             <div className="p-6 sm:p-8 bg-white/[0.01] border border-white/5 rounded-3xl space-y-6">
               <h3 className="text-sm font-bold text-white tracking-widest uppercase font-mono border-b border-white/5 pb-3 flex items-center space-x-2">
