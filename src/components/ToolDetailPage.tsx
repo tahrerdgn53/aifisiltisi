@@ -125,73 +125,124 @@ export default function ToolDetailPage({
           {/* LEFT: Broad specs and commentary (8 cols) */}
           <div className="lg:col-span-8 space-y-8">
             
-            {/* Main Title & Header Box */}
-            <div className="bg-white/[0.02] border border-white/5 p-6 sm:p-8 rounded-3xl relative overflow-hidden">
-              <span className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/5 to-indigo-500/5 blur rounded-3xl pointer-events-none" />
-              
-              <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-                
-                {/* Logo & Category details */}
-                <div className="flex items-start space-x-5">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/10 to-transparent flex items-center justify-center border border-cyan-500/20 shadow-lg text-cyan-400 mt-1 flex-shrink-0">
-                    <LucideIcon name={tool.logo} size={30} className="text-cyan-400" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] bg-cyan-500/10 text-cyan-400 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-widest font-mono border border-cyan-500/15">
-                      {tool.category.toUpperCase()}
-                    </span>
-                    <h1 className="text-2xl sm:text-3xl font-black text-white mt-2 tracking-tight">{tool.name}</h1>
-                    <p className="text-xs text-slate-450 mt-1 font-mono">Yayıncı: AI Fısıltısı</p>
-                  </div>
-                </div>
+     {/* Premium Tool Hero */}
+<section className="relative overflow-hidden rounded-3xl border border-cyan-500/15 bg-gradient-to-br from-white/[0.04] via-white/[0.015] to-cyan-950/10 p-6 sm:p-9 shadow-2xl shadow-cyan-950/20">
+  <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl" />
+  <div className="pointer-events-none absolute -bottom-32 left-1/3 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl" />
 
-                {/* Badges / Interactions buttons */}
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => onUpvote(tool.id)}
-                    className="flex items-center space-x-2 px-4 py-2.5 bg-cyan-500/15 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/25 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer shadow-md shadow-cyan-500/5"
-                  >
-                    <ThumbsUp className="w-4 h-4 text-cyan-400" />
-                    <span>{tool.upvotes} Beğeni</span>
-                  </button>
+  <div className="relative">
+    <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+      
+      {/* Tool identity */}
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl border border-cyan-400/20 bg-cyan-500/10 text-cyan-300 shadow-lg shadow-cyan-500/10">
+          <LucideIcon name={tool.logo} size={38} />
+        </div>
 
-                  <button
-                    onClick={() => onToggleBookmark(tool.id)}
-                    className={`p-2.5 rounded-xl border transition cursor-pointer ${
-                      isBookmarked
-                        ? 'bg-rose-500/10 text-rose-400 border-rose-500/30'
-                        : 'bg-white/5 text-slate-400 border-white/5 hover:text-white'
-                    }`}
-                    title={isBookmarked ? 'Yer İşaretini Kaldır' : 'Favorilere Ekle'}
-                  >
-                    <Bookmark className="w-4 h-4" />
-                  </button>
+        <div className="max-w-2xl">
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <span className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-cyan-300">
+              {tool.category}
+            </span>
 
-                  <button
-                    onClick={handleShareClick}
-                    className="p-2.5 bg-white/5 border border-white/5 text-slate-400 hover:text-white rounded-xl transition cursor-pointer"
-                    title="Bağlantıyı kopyala"
-                  >
-                    {copiedLink ? <Check className="w-4 h-4 text-emerald-400" /> : <Share2 className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-300">
+              {tool.pricing}
+            </span>
 
-              {/* Tag links cloud row */}
-              <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-white/5">
-                {tool.tags.map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="text-[11px] bg-[#0c101a] text-slate-400 border border-white/5 px-3 py-1 rounded-lg font-light"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-                <span className="ml-auto text-xs px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-lg text-slate-400 font-bold">
-                  Ödeme Türü: {tool.pricing}
-                </span>
-              </div>
-            </div>
+            {tool.featured && (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-400/20 bg-indigo-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-indigo-300">
+                <Sparkles className="h-3 w-3" />
+                Editörün Seçimi
+              </span>
+            )}
+          </div>
+
+          <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl">
+            {tool.name}
+          </h1>
+
+          <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300 sm:text-base">
+            {tool.description}
+          </p>
+
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-500">
+            <span>
+              Geliştirici:{' '}
+              <strong className="font-semibold text-slate-300">
+                {tool.developer || tool.name}
+              </strong>
+            </span>
+
+            <span className="hidden h-1 w-1 rounded-full bg-slate-600 sm:block" />
+
+            <span>
+              Aİ Fısıltısı araç kataloğunda incelendi
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main actions */}
+      <div className="flex shrink-0 flex-wrap items-center gap-2 lg:max-w-[260px] lg:justify-end">
+        <a
+          href={tool.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-cyan-500/15 transition hover:-translate-y-0.5 hover:from-cyan-500 hover:to-blue-700 lg:flex-none"
+        >
+          Resmî Site
+          <ExternalLink className="h-4 w-4" />
+        </a>
+
+        <button
+          onClick={() => onToggleBookmark(tool.id)}
+          className={`rounded-xl border p-3 transition ${
+            isBookmarked
+              ? 'border-rose-400/30 bg-rose-500/10 text-rose-300'
+              : 'border-white/10 bg-white/[0.04] text-slate-400 hover:border-cyan-400/20 hover:text-white'
+          }`}
+          title={isBookmarked ? 'Favorilerden kaldır' : 'Favorilere ekle'}
+        >
+          <Bookmark className="h-4 w-4" />
+        </button>
+
+        <button
+          onClick={handleShareClick}
+          className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition hover:border-cyan-400/20 hover:text-white"
+          title="Bağlantıyı kopyala"
+        >
+          {copiedLink ? (
+            <Check className="h-4 w-4 text-emerald-400" />
+          ) : (
+            <Share2 className="h-4 w-4" />
+          )}
+        </button>
+      </div>
+    </div>
+
+    {/* Footer information */}
+    <div className="mt-8 flex flex-col gap-5 border-t border-white/5 pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-wrap gap-2">
+        {tool.tags.slice(0, 5).map((tag, index) => (
+          <span
+            key={`${tag}-${index}`}
+            className="rounded-lg border border-white/5 bg-slate-950/60 px-3 py-1.5 text-[11px] text-slate-400"
+          >
+            #{tag}
+          </span>
+        ))}
+      </div>
+
+      <button
+        onClick={() => onUpvote(tool.id)}
+        className="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-400/20 bg-cyan-500/10 px-4 py-2.5 text-xs font-bold text-cyan-300 transition hover:bg-cyan-500/20"
+      >
+        <ThumbsUp className="h-4 w-4" />
+        <span>{tool.upvotes} kişi beğendi</span>
+      </button>
+    </div>
+  </div>
+</section>
 
             {/* Detailed long explanation markup */}
             <div className="p-6 sm:p-8 bg-white/[0.01] border border-white/5 rounded-3xl space-y-4">
