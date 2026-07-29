@@ -14,6 +14,7 @@ interface AdminPortalPageProps {
   newsList: AINews[];
   onAddTool: (tool: any) => void;
   onAddNews: (news: any) => void;
+  onUpdateTool: (tool: AITool) => void;
   onDeleteTool: (id: string) => void;
   onDeleteNews: (id: string) => void;
   isAdmin: boolean;
@@ -24,6 +25,7 @@ interface AdminPortalPageProps {
 export default function AdminPortalPage({
   tools,
   newsList,
+  onUpdateTool,
   onAddTool,
   onAddNews,
   onDeleteTool,
