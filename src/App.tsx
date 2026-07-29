@@ -301,14 +301,14 @@ useEffect(() => {
   upvotes: 1,
   bookmarks: false,
   featured: false,
-  logo: 'Sparkles'
-  editorReview: tool.editor_review,
-  targetAudience: tool.target_audience,
-  useCases: tool.use_cases,
-  pros: tool.pros,
-  cons: tool.cons,
-  seoTitle: tool.seo_title,
-  seoDescription: tool.seo_description,
+logo: 'Sparkles',
+editorReview: tool.editor_review,
+targetAudience: tool.target_audience,
+useCases: tool.use_cases,
+pros: tool.pros,
+cons: tool.cons,
+seoTitle: tool.seo_title,
+seoDescription: tool.seo_description,
 }));
 
     const mappedNews = (newsData || []).map((news: any) => ({
