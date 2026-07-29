@@ -352,29 +352,78 @@ export default function ToolDetailPage({
               </Link>
             </div>
 
-            {/* Related Tools suggestions list */}
-            <div className="p-6 bg-white/[0.01] border border-white/5 rounded-3xl space-y-4">
-              <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono border-b border-white/5 pb-2">
-                BENZER AI ARAÇLARI
-              </h4>
-              <div className="space-y-3">
-                {relatedTools.map((rt) => (
-                  <Link
-                    key={rt.id}
-                    to={`/ai-tools/${slugify(rt.name)}`}
-                    className="flex items-center space-x-3 p-2 hover:bg-white/[0.03] border border-transparent hover:border-white/5 rounded-xl transition group duration-200"
-                  >
-                    <div className="w-9 h-9 bg-slate-900 border border-white/5 font-bold flex items-center justify-center rounded-lg text-cyan-400 group-hover:bg-cyan-500/10">
-                      <LucideIcon name={rt.logo} size={16} />
-                    </div>
-                    <div>
-                      <span className="font-bold text-xs text-white block group-hover:text-cyan-355 transition truncate max-w-[150px]">{rt.name}</span>
-                      <span className="text-[10px] text-slate-500 font-mono italic">{rt.pricing}</span>
-                    </div>
-                  </Link>
-                ))}
+          {/* Premium Related Tools */}
+<section className="rounded-3xl border border-white/5 bg-white/[0.01] p-6 sm:p-8">
+  <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-400">
+        Alternatifleri Keşfet
+      </span>
+
+      <h2 className="mt-2 text-2xl font-black tracking-tight text-white">
+        Benzer AI Araçları
+      </h2>
+
+      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">
+        {tool.name} ile aynı kategoride yer alan alternatif araçları
+        karşılaştırarak ihtiyacınıza en uygun seçeneği keşfedin.
+      </p>
+    </div>
+
+    <span className="text-xs font-medium text-slate-500">
+      {relatedTools.length} alternatif
+    </span>
+  </div>
+
+  {relatedTools.length > 0 ? (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      {relatedTools.map((relatedTool) => (
+        <Link
+          key={relatedTool.id}
+          to={`/ai-tools/${slugify(relatedTool.name)}`}
+          className="group flex min-h-[190px] flex-col justify-between rounded-2xl border border-white/5 bg-slate-950/50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-slate-950/80 hover:shadow-xl hover:shadow-cyan-500/5"
+        >
+          <div>
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/10 text-cyan-300">
+                <LucideIcon name={relatedTool.logo} size={22} />
               </div>
+
+              <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                {relatedTool.pricing}
+              </span>
             </div>
+
+            <h3 className="mt-5 text-lg font-black text-white transition group-hover:text-cyan-300">
+              {relatedTool.name}
+            </h3>
+
+            <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-slate-400">
+              {relatedTool.description}
+            </p>
+          </div>
+
+          <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-4">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+              {relatedTool.category}
+            </span>
+
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-400">
+              İncele
+              <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </span>
+          </div>
+        </Link>
+      ))}
+    </div>
+  ) : (
+    <div className="rounded-2xl border border-dashed border-white/10 bg-slate-950/30 px-6 py-10 text-center">
+      <p className="text-sm text-slate-500">
+        Bu kategoride henüz başka bir araç bulunmuyor.
+      </p>
+    </div>
+  )}
+</section>
 
           </div>
 
