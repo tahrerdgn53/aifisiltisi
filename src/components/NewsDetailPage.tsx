@@ -204,10 +204,6 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
             <article className="max-w-3xl text-base sm:text-[17px] text-slate-200 leading-8 sm:leading-9 font-light space-y-7 font-sans whitespace-pre-line tracking-[0.01em]">
               {article.content}
             </article>
-
-            <div className="text-red-400 text-sm">
-  Toplam makale: {newsList.length} | Önerilen makale: {recommendedNews.length}
-</div>
             
             {recommendedNews.length > 0 && (
               <section className="pt-6 space-y-6">
