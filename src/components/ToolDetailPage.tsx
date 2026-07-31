@@ -346,10 +346,6 @@ export default function ToolDetailPage({
           </div>
 
           <h3 className="mt-4 text-sm font-bold text-white">{audience}</h3>
-
-          <p className="mt-2 text-xs leading-relaxed text-slate-500">
-            {tool.name} ile çalışmalarını daha hızlı ve verimli hâle getirmek isteyen kullanıcılar.
-          </p>
         </div>
       )
     )}
