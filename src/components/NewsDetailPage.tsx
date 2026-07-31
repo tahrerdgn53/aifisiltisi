@@ -18,15 +18,20 @@ import {
   ArrowRight,
   Sparkles
 } from 'lucide-react';
-import { AINews, Comment } from '../types';
+import { AITool, AINews, Comment } from '../types';
 import { slugify, findNewsBySlug } from '../utils';
 
 interface NewsDetailPageProps {
   newsList: AINews[];
+  tools: AITool[];
   onUpvoteNews: (id: string) => void;
 }
 
-export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPageProps) {
+export default function NewsDetailPage({
+  newsList,
+  tools,
+  onUpvoteNews
+}: NewsDetailPageProps) {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [article, setArticle] = useState<AINews | null>(null);
