@@ -360,8 +360,8 @@ export default function AdminPortalPage({
 
                   <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 scrollbar-thin">
                     {newsList.map((news) => (
-                      <div
-                        key={news.id}
+                      div key={news.id}>
+                        <div
                         className="flex items-center justify-between p-3.5 bg-white/[0.01] hover:bg-white/[0.02] border border-white/5 rounded-xl transition text-xs gap-3"
                       >
                         <div className="flex items-center space-x-3 truncate min-w-0">
@@ -416,13 +416,25 @@ export default function AdminPortalPage({
   </button>
 </div>
 
-                        editingNewsId === news.id && (
-  <EditNewsPanel
-    news={news}
-    onUpdateNews={onUpdateNews}
-    onClose={() => setEditingNewsId(null)}
-  />
-)}
+        {newsList.map((news) => (
+  <div key={news.id}>
+    <div className="flex items-center justify-between ...">
+      {/* Makale bilgileri */}
+
+      <div className="flex items-center space-x-2 flex-shrink-0">
+        {/* Düzenle ve sil butonları */}
+      </div>
+    </div>
+
+    {editingNewsId === news.id && (
+      <EditNewsPanel
+        news={news}
+        onUpdateNews={onUpdateNews}
+        onClose={() => setEditingNewsId(null)}
+      />
+    )}
+  </div>
+))}
                       </div>
                     ))}
                   </div>
