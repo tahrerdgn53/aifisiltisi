@@ -472,7 +472,7 @@ setTools(mappedTools as any);
   );
 };
 
-  const handleUpdateNews = async (updatedNews: AINews) => {
+const handleUpdateNews = async (updatedNews: AINews) => {
   const formatted = {
     title: updatedNews.title,
     category: updatedNews.category,
@@ -482,14 +482,28 @@ setTools(mappedTools as any);
     content: updatedNews.content
   };
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from('articles')
     .update(formatted)
-    .eq('id', updatedNews.id);
+    .eq('id', updatedNews.id)
+    .select();
 
   if (error) {
     alert('Makale güncellenemedi: ' + error.message);
     console.error('News update error:', error);
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    alert(
+      'Makale veritabanında güncellenmedi. ID eşleşmiyor veya Supabase UPDATE yetkisi bulunmuyor.'
+    );
+
+    console.error('Hiçbir makale satırı güncellenmedi.', {
+      updatedNewsId: updatedNews.id,
+      returnedData: data
+    });
+
     return;
   }
 
@@ -498,6 +512,8 @@ setTools(mappedTools as any);
       news.id === updatedNews.id ? updatedNews : news
     )
   );
+
+  alert('Makale başarıyla güncellendi.');
 };
   
 const handleAddNewsSubmit = async (newNews: any) => {
