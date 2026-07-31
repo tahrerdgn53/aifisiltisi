@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="tr" translate="no" class="notranslate">
   <head>
+    <script>
+  const redirectPath = sessionStorage.getItem('spa-redirect');
+
+  if (redirectPath) {
+    sessionStorage.removeItem('spa-redirect');
+    window.history.replaceState(null, '', redirectPath);
+  }
+</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google" content="notranslate" />
