@@ -16,6 +16,7 @@ import {
   Share2,
   Check,
   ArrowRight,
+  Sparkles
 } from 'lucide-react';
 import { AINews, Comment } from '../types';
 import { slugify, findNewsBySlug } from '../utils';
@@ -77,7 +78,7 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
       targetId: article.id,
       username: username.trim(),
       commentText: commentText.trim(),
-      date: 'Bugün',
+      date: 'Bugün'
     };
 
     const updatedComments = [newComment, ...comments];
@@ -92,78 +93,81 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
     setTimeout(() => setCopiedLink(false), 2000);
   };
 
-  const otherNews = newsList
+  const recommendedNews = newsList
     .filter((news) => news.id !== article.id)
-    .slice(0, 3);
+    .sort((first, second) => {
+      const firstSameCategory = first.category === article.category ? 1 : 0;
+      const secondSameCategory = second.category === article.category ? 1 : 0;
 
-  const contentParagraphs = article.content
-    .split(/\n\s*\n/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
+      if (firstSameCategory !== secondSameCategory) {
+        return secondSameCategory - firstSameCategory;
+      }
+
+      const firstDate = new Date(first.createdAt || first.date || 0).getTime();
+      const secondDate = new Date(second.createdAt || second.date || 0).getTime();
+      return secondDate - firstDate;
+    })
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-[#02040a] text-slate-100 py-16 px-4 sm:px-8 relative overflow-hidden">
-      <span className="absolute top-8 right-0 w-[34rem] h-[34rem] bg-cyan-500/[0.05] rounded-full blur-3xl pointer-events-none" />
-      <span className="absolute top-[32rem] left-0 w-[28rem] h-[28rem] bg-indigo-500/[0.04] rounded-full blur-3xl pointer-events-none" />
+      <span className="absolute top-10 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-400 hover:text-white font-medium transition mb-10"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Gündem ve Analizlere Dön</span>
-        </Link>
+      <div className="max-w-6xl mx-auto space-y-10 relative z-10">
+        <div>
+          <Link
+            to="/"
+            className="inline-flex items-center space-x-2 text-xs sm:text-sm text-slate-400 hover:text-white font-medium transition"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Gündem ve Analizlere Dön</span>
+          </Link>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14">
-          <main className="lg:col-span-8 min-w-0">
-            <header className="mb-9">
-              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 mb-5">
-                <span className="text-[10px] bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 px-3 py-1 rounded-full font-bold uppercase tracking-[0.18em] font-mono">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div className="lg:col-span-8 space-y-8">
+            <div className="space-y-5">
+              <div className="flex flex-wrap items-center gap-2.5 text-xs text-slate-500">
+                <span className="text-[10px] bg-cyan-500/10 text-cyan-400 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-widest font-mono">
                   {article.category}
                 </span>
-
-                <span className="hidden sm:inline text-slate-700">•</span>
-
-                <span className="flex items-center gap-1.5 font-mono">
+                <span>&bull;</span>
+                <span className="flex items-center space-x-1 font-mono">
                   <Calendar className="w-3.5 h-3.5" />
                   <span>{article.date}</span>
                 </span>
-
-                <span className="text-slate-700">•</span>
-
-                <span className="flex items-center gap-1.5 font-mono">
+                <span>&bull;</span>
+                <span className="flex items-center space-x-1 font-mono">
                   <Clock className="w-3.5 h-3.5" />
                   <span>{article.readTime}</span>
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-black text-white leading-[1.08] tracking-[-0.035em] max-w-4xl">
+              <h1 className="text-3xl sm:text-5xl font-extrabold text-white leading-[1.05] tracking-tight max-w-4xl">
                 {article.title}
               </h1>
 
               {article.summary && (
-                <p className="mt-6 text-base sm:text-xl text-slate-300 leading-8 font-light max-w-3xl">
+                <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light max-w-3xl">
                   {article.summary}
                 </p>
               )}
 
-              <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-y border-white/[0.07] py-4">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0">
-                    <User className="w-4 h-4 text-cyan-300" />
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-y border-white/5 py-4">
+                <div className="flex items-center space-x-3 text-xs font-semibold">
+                  <div className="w-9 h-9 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                    <User className="w-4 h-4 text-cyan-400" />
                   </div>
-
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-slate-200 truncate">{article.author}</p>
-                    <p className="text-[11px] text-slate-500 font-mono truncate">{article.source}</p>
+                  <div className="space-y-0.5">
+                    <p className="text-slate-200">{article.author}</p>
+                    <p className="text-[10px] text-slate-500 font-mono">{article.source}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center space-x-2">
                   <button
                     onClick={() => onUpvoteNews(article.id)}
-                    className="flex items-center gap-1.5 px-3.5 py-2 bg-cyan-500/10 hover:bg-cyan-500/15 text-cyan-300 border border-cyan-500/25 rounded-xl text-xs font-bold transition cursor-pointer"
+                    className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-cyan-500/10 hover:bg-cyan-500/15 text-cyan-300 border border-cyan-500/25 rounded-lg text-xs font-bold transition cursor-pointer"
                   >
                     <ThumbsUp className="w-3.5 h-3.5" />
                     <span>{article.upvotes} Beğeni</span>
@@ -171,20 +175,20 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
 
                   <button
                     onClick={handleShareClick}
+                    className="p-1.5 bg-white/5 border border-white/5 text-slate-400 hover:text-white rounded-lg transition cursor-pointer"
                     aria-label="Makale bağlantısını kopyala"
-                    className="p-2 bg-white/5 border border-white/[0.07] text-slate-400 hover:text-white hover:bg-white/[0.08] rounded-xl transition cursor-pointer"
                   >
                     {copiedLink ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
                     ) : (
-                      <Share2 className="w-4 h-4" />
+                      <Share2 className="w-3.5 h-3.5" />
                     )}
                   </button>
                 </div>
               </div>
-            </header>
+            </div>
 
-            <div className="relative aspect-[16/9] rounded-[1.75rem] overflow-hidden border border-white/[0.07] bg-slate-900/50 shadow-2xl shadow-black/20 mb-12">
+            <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/5 bg-slate-900/50">
               <img
                 src={
                   article.imageUrl ||
@@ -194,24 +198,83 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover opacity-85"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#02040a]/70 via-transparent to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#02040a]/80 via-transparent to-transparent" />
             </div>
 
-            <article className="max-w-3xl mx-auto text-[16px] sm:text-[18px] text-slate-200 leading-[1.95] font-light tracking-[-0.01em]">
-              {contentParagraphs.map((paragraph, index) => (
-                <p
-                  key={`${article.id}-paragraph-${index}`}
-                  className="mb-7 whitespace-pre-line first-letter:text-slate-100"
-                >
-                  {paragraph}
-                </p>
-              ))}
+            <article className="max-w-3xl text-base sm:text-[17px] text-slate-200 leading-8 sm:leading-9 font-light space-y-7 font-sans whitespace-pre-line tracking-[0.01em]">
+              {article.content}
             </article>
 
-            <section className="mt-14 p-6 sm:p-8 bg-white/[0.015] border border-white/[0.07] rounded-3xl space-y-6">
-              <h3 className="text-sm font-bold text-white tracking-widest uppercase font-mono border-b border-white/[0.07] pb-3 flex items-center gap-2">
+            {recommendedNews.length > 0 && (
+              <section className="pt-6 space-y-6">
+                <div className="flex items-end justify-between gap-4">
+                  <div className="space-y-2">
+                    <div className="inline-flex items-center gap-2 text-cyan-400">
+                      <Sparkles className="w-4 h-4" />
+                      <span className="text-[10px] font-bold uppercase tracking-[0.22em] font-mono">
+                        Okumaya devam et
+                      </span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                      Bunlar da İlginizi Çekebilir
+                    </h2>
+                    <p className="text-sm text-slate-400 font-light">
+                      Aynı konuyu farklı açılardan ele alan seçilmiş içerikler.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                  {recommendedNews.map((news) => (
+                    <Link
+                      key={news.id}
+                      to={`/news/${slugify(news.title)}`}
+                      className="group rounded-2xl overflow-hidden border border-white/5 bg-white/[0.015] hover:border-cyan-500/25 hover:bg-cyan-500/[0.025] transition-all duration-300"
+                    >
+                      <div className="relative aspect-[16/10] overflow-hidden bg-slate-900/60">
+                        <img
+                          src={
+                            news.imageUrl ||
+                            'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=900'
+                          }
+                          alt={news.title}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover opacity-75 group-hover:opacity-90 group-hover:scale-[1.03] transition duration-500"
+                        />
+                        <span className="absolute inset-0 bg-gradient-to-t from-[#02040a] via-[#02040a]/10 to-transparent" />
+                        <span className="absolute left-4 bottom-4 text-[9px] bg-cyan-500/15 text-cyan-300 border border-cyan-500/20 px-2.5 py-1 rounded-full font-bold uppercase tracking-wider font-mono">
+                          {news.category}
+                        </span>
+                      </div>
+
+                      <div className="p-5 space-y-4">
+                        <div className="space-y-2">
+                          <h3 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-cyan-300 transition line-clamp-3">
+                            {news.title}
+                          </h3>
+                          <p className="text-xs text-slate-400 leading-relaxed font-light line-clamp-3">
+                            {news.summary}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center justify-between border-t border-white/5 pt-3 text-[10px] text-slate-500 font-mono">
+                          <span>{news.readTime}</span>
+                          <span className="inline-flex items-center gap-1 text-cyan-400 font-bold">
+                            Oku
+                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition" />
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <div className="p-6 sm:p-8 bg-white/[0.01] border border-white/5 rounded-3xl space-y-6">
+              <h3 className="text-sm font-bold text-white tracking-widest uppercase font-mono border-b border-white/5 pb-3 flex items-center space-x-2">
                 <MessageSquare className="w-4 h-4 text-cyan-400" />
-                <span>Yorumlar / Fikirler ({comments.length})</span>
+                <span>YORUMLAR / FİKİRLER ({comments.length})</span>
               </h3>
 
               <form onSubmit={handleAddComment} className="space-y-4">
@@ -223,23 +286,21 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
                     placeholder="Takma adınız..."
-                    className="sm:col-span-1 bg-slate-950 border border-white/[0.07] focus:border-cyan-500/50 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none transition"
+                    className="sm:col-span-1 bg-slate-950 border border-white/5 focus:border-cyan-500/50 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none transition"
                   />
-
                   <input
                     type="text"
                     required
                     value={commentText}
                     onChange={(event) => setCommentText(event.target.value)}
                     placeholder="Yazıya dair ne düşünüyorsunuz?"
-                    className="sm:col-span-2 bg-slate-950 border border-white/[0.07] focus:border-cyan-500/50 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none transition"
+                    className="sm:col-span-2 bg-slate-950 border border-white/5 focus:border-cyan-500/50 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none transition"
                   />
                 </div>
-
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/20 text-xs font-bold rounded-xl transition cursor-pointer flex items-center gap-1.5"
+                    className="px-4 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/20 text-xs font-bold rounded-xl transition cursor-pointer flex items-center space-x-1.5"
                   >
                     <span>Gönder</span>
                     <Send className="w-3.5 h-3.5" />
@@ -256,7 +317,7 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
                   comments.map((comment) => (
                     <div
                       key={comment.id}
-                      className="p-4 rounded-xl bg-white/[0.008] border border-white/[0.06] text-xs sm:text-sm space-y-1.5"
+                      className="p-4 rounded-xl bg-white/[0.005] border border-white/5 text-xs sm:text-sm space-y-1.5"
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-slate-200">@{comment.username}</span>
@@ -267,14 +328,14 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
                   ))
                 )}
               </div>
-            </section>
-          </main>
+            </div>
+          </div>
 
-          <aside className="lg:col-span-4 space-y-6 lg:pt-4">
-            <div className="p-6 bg-gradient-to-br from-indigo-950/10 to-indigo-900/10 border border-cyan-500/20 rounded-3xl relative overflow-hidden shadow-xl">
+          <aside className="lg:col-span-4 space-y-6">
+            <div className="p-6 bg-gradient-to-br from-indigo-950/10 to-indigo-900/10 border border-cyan-500/20 rounded-3xl relative overflow-hidden shadow-xl lg:sticky lg:top-24">
               <div className="relative space-y-4">
                 <span className="text-[8px] bg-cyan-500/25 border border-cyan-500/30 text-cyan-400 font-bold px-2 py-0.5 rounded uppercase tracking-widest font-mono">
-                  Haftanın AI Aracı
+                  HAFTANIN AI ARACI
                 </span>
                 <h4 className="text-base font-extrabold text-white tracking-tight">Vercel v0</h4>
                 <p className="text-xs text-slate-300 font-light leading-relaxed">
@@ -284,34 +345,8 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
                   to="/ai-tools/v0-by-vercel"
                   className="w-full text-center block px-4 py-2.5 bg-cyan-400 hover:bg-cyan-500 text-slate-950 font-black text-xs rounded-xl transition whitespace-nowrap"
                 >
-                  Aracı İncele
+                  Aracı İncele &amp; Git
                 </Link>
-              </div>
-            </div>
-
-            <div className="p-6 bg-white/[0.015] border border-white/[0.07] rounded-3xl space-y-4">
-              <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono border-b border-white/[0.07] pb-3">
-                Diğer Öne Çıkan İçerikler
-              </h4>
-
-              <div className="space-y-5">
-                {otherNews.map((news) => (
-                  <Link
-                    key={news.id}
-                    to={`/news/${slugify(news.title)}`}
-                    className="block group"
-                  >
-                    <span className="font-bold text-xs text-white group-hover:text-cyan-400 transition leading-snug line-clamp-2">
-                      {news.title}
-                    </span>
-                    <span className="mt-1.5 text-[10px] text-slate-500 font-mono block">
-                      {news.date}
-                    </span>
-                    <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-bold text-cyan-400 opacity-0 group-hover:opacity-100 transition">
-                      Oku <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </Link>
-                ))}
               </div>
             </div>
           </aside>
