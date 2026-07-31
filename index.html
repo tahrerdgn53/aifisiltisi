@@ -45,6 +45,24 @@
 
       gtag('config', 'G-442C4VHVNR');
     </script>
+
+    <script>
+  const redirectPath = sessionStorage.getItem("spa-redirect");
+
+  if (redirectPath) {
+    sessionStorage.removeItem("spa-redirect");
+
+    const currentPath =
+      window.location.pathname +
+      window.location.search +
+      window.location.hash;
+
+    if (redirectPath !== currentPath) {
+      window.history.replaceState(null, "", redirectPath);
+    }
+  }
+</script>
+    
   </head>
   <body class="notranslate" translate="no">
     <div id="root" class="notranslate" translate="no"></div>
