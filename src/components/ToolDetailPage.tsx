@@ -39,6 +39,7 @@ export default function ToolDetailPage({
   // Load target tool and its custom mock comments based on slug / id
   useEffect(() => {
     if (!slug) return;
+    if (tools.length === 0) return;
     const matched = findToolBySlug(tools, slug);
     if (matched) {
       setTool(matched);
