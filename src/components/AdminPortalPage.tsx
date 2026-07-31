@@ -16,6 +16,7 @@ import {
 import { AINews, AITool } from '../types';
 import SubmitForm from './SubmitForm';
 import EditToolPanel from './EditToolPanel';
+import EditNewsPanel from './EditNewsPanel';
 
 interface AdminPortalPageProps {
   tools: AITool[];
@@ -25,6 +26,7 @@ interface AdminPortalPageProps {
   onUpdateTool: (tool: AITool) => void | Promise<void>;
   onDeleteTool: (id: string) => void;
   onDeleteNews: (id: string) => void;
+  onUpdateNews: (news: AINews) => void | Promise<void>;
   isAdmin: boolean;
   onLogin: (passcode: string) => boolean;
   onLogout: () => void;
@@ -37,6 +39,7 @@ export default function AdminPortalPage({
   onAddNews,
   onUpdateTool,
   onDeleteTool,
+  onUpdateNews,
   onDeleteNews,
   isAdmin,
   onLogin,
@@ -48,6 +51,7 @@ export default function AdminPortalPage({
     'create' | 'manage_tools' | 'manage_news'
   >('create');
   const [editingToolId, setEditingToolId] = useState<string | null>(null);
+  const [editingNewsId, setEditingNewsId] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = 'Sistem Yönetim Paneli - AIFısıltısı';
