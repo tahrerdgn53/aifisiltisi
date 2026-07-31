@@ -205,6 +205,10 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
               {article.content}
             </article>
 
+            <div className="text-red-400 text-sm">
+  Toplam makale: {newsList.length} | Önerilen makale: {recommendedNews.length}
+</div>
+            
             {recommendedNews.length > 0 && (
               <section className="pt-6 space-y-6">
                 <div className="flex items-end justify-between gap-4">
