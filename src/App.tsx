@@ -254,24 +254,22 @@ function AppContent() {
     }
   }, []);
 
- useEffect(() => {
-  if (location.pathname === "/") {
-    document.title = "Aİ Fısıltısı";
-  }
-}, [location.pathname]);
+  useEffect(() => {
+    if (location.pathname === '/') {
+      document.title = 'Aİ Fısıltısı';
 
-    const metaDescription = document.querySelector(
-      'meta[name="description"]'
-    );
-
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Yapay zekâ araçlarını keşfedin, karşılaştırın ve detaylı incelemelerini okuyun."
+      const metaDescription = document.querySelector(
+        'meta[name="description"]'
       );
+
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          'content',
+          'Yapay zekâ araçlarını keşfedin, karşılaştırın ve detaylı incelemelerini okuyun.'
+        );
+      }
     }
-  }
-}, [location.pathname]);
+  }, [location.pathname]);
 
   const handleAdminLogin = (passcode: string): boolean => {
     // Read optional passcode from environment variables or fallback to obscured test passcode "fisilti123"
