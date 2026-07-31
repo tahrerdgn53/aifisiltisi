@@ -36,10 +36,10 @@ export default function NewsDetailPage({ newsList, onUpvoteNews }: NewsDetailPag
   const [commentText, setCommentText] = useState('');
   const [copiedLink, setCopiedLink] = useState(false);
 
-  useEffect(() => {
-    if (!slug) return;
+ useEffect(() => {
+  if (!slug || newsList.length === 0) return;
 
-    const matched = findNewsBySlug(newsList, slug);
+  const matched = findNewsBySlug(newsList, slug);
 
     if (matched) {
       setArticle(matched);
