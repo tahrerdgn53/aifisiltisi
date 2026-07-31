@@ -607,15 +607,16 @@ const handleAddNewsSubmit = async (newNews: any) => {
             } 
           />
 
-          <Route
-            path="/news/:slug"
-            element={
-              <NewsDetailPage
-                newsList={newsList}
-                onUpvoteNews={handleUpvoteNews}
-              />
-            }
-          />
+         <Route
+  path="/news/:slug"
+  element={
+    <NewsDetailPage
+      newsList={newsList}
+      tools={tools}
+      onUpvoteNews={handleUpvoteNews}
+    />
+  }
+/>
 
           <Route
             path="/admin"
