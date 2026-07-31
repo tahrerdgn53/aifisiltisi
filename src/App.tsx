@@ -335,6 +335,7 @@ seoDescription: tool.seo_description,
       author: news.author,
       source: news.source,
       summary: news.summary,
+      excerpt: news.summary,
       content: news.content,
       createdAt: news.created_at,
       readTime: '3 dk okuma',
@@ -478,38 +479,47 @@ const handleUpdateNews = async (updatedNews: AINews) => {
     category: updatedNews.category,
     author: updatedNews.author || 'AI Fısıltısı',
     source: updatedNews.source || 'AI Fısıltısı',
-    summary: updatedNews.excerpt,
-    content: updatedNews.content
+    summary: updatedNews.excerpt || updatedNews.summary || '',
+    content: updatedNews.content || ''
   };
 
   const { data, error } = await supabase
     .from('articles')
     .update(formatted)
     .eq('id', updatedNews.id)
-    .select();
+    .select('*')
+    .single();
 
   if (error) {
     alert('Makale güncellenemedi: ' + error.message);
-    console.error('News update error:', error);
+    console.error('Article update error:', error);
     return;
   }
 
-  if (!data || data.length === 0) {
-    alert(
-      'Makale veritabanında güncellenmedi. ID eşleşmiyor veya Supabase UPDATE yetkisi bulunmuyor.'
-    );
-
-    console.error('Hiçbir makale satırı güncellenmedi.', {
-      updatedNewsId: updatedNews.id,
-      returnedData: data
-    });
-
+  if (!data) {
+    alert('Makale veritabanında güncellenemedi.');
     return;
   }
+
+  const savedNews: AINews = {
+    ...updatedNews,
+    id: String(data.id),
+    title: data.title,
+    category: data.category,
+    author: data.author,
+    source: data.source,
+    summary: data.summary,
+    excerpt: data.summary,
+    content: data.content,
+    createdAt: data.created_at,
+    date: data.created_at
+      ? new Date(data.created_at).toLocaleDateString('tr-TR')
+      : updatedNews.date
+  };
 
   setNewsList((currentNews) =>
     currentNews.map((news) =>
-      news.id === updatedNews.id ? updatedNews : news
+      news.id === String(data.id) ? savedNews : news
     )
   );
 
