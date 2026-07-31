@@ -471,6 +471,34 @@ setTools(mappedTools as any);
     )
   );
 };
+
+  const handleUpdateNews = async (updatedNews: AINews) => {
+  const formatted = {
+    title: updatedNews.title,
+    category: updatedNews.category,
+    author: updatedNews.author || 'AI Fısıltısı',
+    source: updatedNews.source || 'AI Fısıltısı',
+    summary: updatedNews.excerpt,
+    content: updatedNews.content
+  };
+
+  const { error } = await supabase
+    .from('news')
+    .update(formatted)
+    .eq('id', updatedNews.id);
+
+  if (error) {
+    alert('Makale güncellenemedi: ' + error.message);
+    console.error('News update error:', error);
+    return;
+  }
+
+  setNewsList((currentNews) =>
+    currentNews.map((news) =>
+      news.id === updatedNews.id ? updatedNews : news
+    )
+  );
+};
   
 const handleAddNewsSubmit = async (newNews: any) => {
   const formatted = {
@@ -627,6 +655,7 @@ const handleAddNewsSubmit = async (newNews: any) => {
                 onAddTool={handleAddToolSubmit}
                 onAddNews={handleAddNewsSubmit}
                 onUpdateTool={handleUpdateTool}
+                onUpdateNews={handleUpdateNews}
                 onDeleteTool={handleDeleteTool}
                 onDeleteNews={handleDeleteNews}
                 isAdmin={isAdmin}
