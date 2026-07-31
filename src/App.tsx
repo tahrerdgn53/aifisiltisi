@@ -483,7 +483,7 @@ setTools(mappedTools as any);
   };
 
   const { error } = await supabase
-    .from('news')
+    .from('articles')
     .update(formatted)
     .eq('id', updatedNews.id);
 
