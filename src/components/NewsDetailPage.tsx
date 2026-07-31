@@ -114,6 +114,79 @@ export default function NewsDetailPage({
     })
     .slice(0, 3);
 
+  const articleText = [
+  article.title,
+  article.summary,
+  article.content,
+  article.category
+]
+  .filter(Boolean)
+  .join(' ')
+  .toLocaleLowerCase('tr-TR');
+
+const scoredTools = tools
+  .map((tool) => {
+    let score = 0;
+
+    const toolName = tool.name.toLocaleLowerCase('tr-TR');
+    const toolCategory = (tool.category || '').toLocaleLowerCase('tr-TR');
+    const toolDescription = (tool.description || '').toLocaleLowerCase('tr-TR');
+
+    const toolTags = Array.isArray(tool.tags)
+      ? tool.tags.map((tag) => String(tag).toLocaleLowerCase('tr-TR'))
+      : [];
+
+    if (articleText.includes(toolName)) {
+      score += 10;
+    }
+
+    if (toolCategory && articleText.includes(toolCategory)) {
+      score += 4;
+    }
+
+    toolTags.forEach((tag) => {
+      if (tag.length > 2 && articleText.includes(tag)) {
+        score += 2;
+      }
+    });
+
+    const descriptionWords = toolDescription
+      .split(/\s+/)
+      .filter((word) => word.length > 5);
+
+    descriptionWords.forEach((word) => {
+      if (articleText.includes(word)) {
+        score += 1;
+      }
+    });
+
+    return { tool, score };
+  })
+  .sort((first, second) => {
+    if (second.score !== first.score) {
+      return second.score - first.score;
+    }
+
+    return (second.tool.upvotes || 0) - (first.tool.upvotes || 0);
+  });
+
+const matchedTools = scoredTools
+  .filter((item) => item.score > 0)
+  .slice(0, 3)
+  .map((item) => item.tool);
+
+const fallbackTools = tools
+  .filter(
+    (tool) =>
+      !matchedTools.some((matchedTool) => matchedTool.id === tool.id)
+  )
+  .sort((first, second) => (second.upvotes || 0) - (first.upvotes || 0));
+
+const relatedTools = [
+  ...matchedTools,
+  ...fallbackTools
+].slice(0, 3);
+  
   return (
     <div className="min-h-screen bg-[#02040a] text-slate-100 py-16 px-4 sm:px-8 relative overflow-hidden">
       <span className="absolute top-10 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
@@ -275,6 +348,74 @@ export default function NewsDetailPage({
                 </div>
               </section>
             )}
+
+            {relatedTools.length > 0 && (
+  <section className="pt-8 space-y-6">
+    <div className="space-y-2">
+      <div className="inline-flex items-center gap-2 text-indigo-400">
+        <Sparkles className="w-4 h-4" />
+        <span className="text-[10px] font-bold uppercase tracking-[0.22em] font-mono">
+          Araçları keşfet
+        </span>
+      </div>
+
+      <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+        Bu Yazıyla İlgili AI Araçları
+      </h2>
+
+      <p className="text-sm text-slate-400 font-light">
+        Makalenin konusuyla eşleşen yapay zekâ araçlarını inceleyin.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+      {relatedTools.map((tool) => (
+        <Link
+          key={tool.id}
+          to={`/ai-tools/${slugify(tool.name)}`}
+          className="group flex flex-col justify-between min-h-[220px] p-5 rounded-2xl border border-white/5 bg-gradient-to-br from-white/[0.025] to-indigo-500/[0.025] hover:border-indigo-400/30 hover:bg-indigo-500/[0.04] transition-all duration-300"
+        >
+          <div className="space-y-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="w-11 h-11 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-indigo-400" />
+              </div>
+
+              <span className="text-[9px] px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-slate-400 font-bold uppercase tracking-wider font-mono">
+                {tool.pricing}
+              </span>
+            </div>
+
+            <div className="space-y-2">
+              <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider font-mono">
+                {tool.category}
+              </span>
+
+              <h3 className="text-lg font-extrabold text-white group-hover:text-indigo-300 transition">
+                {tool.name}
+              </h3>
+
+              <p className="text-xs text-slate-400 leading-relaxed font-light line-clamp-3">
+                {tool.description}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between border-t border-white/5 pt-4 mt-5">
+            <span className="text-[10px] text-slate-500 font-mono">
+              {tool.developer}
+            </span>
+
+            <span className="inline-flex items-center gap-1 text-xs text-indigo-400 font-bold">
+              Aracı İncele
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition" />
+            </span>
+          </div>
+        </Link>
+      ))}
+    </div>
+  </section>
+)}
 
             <div className="p-6 sm:p-8 bg-white/[0.01] border border-white/5 rounded-3xl space-y-6">
               <h3 className="text-sm font-bold text-white tracking-widest uppercase font-mono border-b border-white/5 pb-3 flex items-center space-x-2">
