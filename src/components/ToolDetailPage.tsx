@@ -381,10 +381,6 @@ export default function ToolDetailPage({
 
           <div>
             <h3 className="text-sm font-bold text-white">{useCase}</h3>
-
-            <p className="mt-2 text-xs leading-relaxed text-slate-500">
-              {tool.name} bu kullanım senaryosunda üretim sürecini hızlandırmaya yardımcı olabilir.
-            </p>
           </div>
         </div>
       )
