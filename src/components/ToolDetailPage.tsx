@@ -373,17 +373,17 @@ export default function ToolDetailPage({
     {(tool.useCases?.length ? tool.useCases : tool.tags.slice(0, 6)).map(
       (useCase, index) => (
         <div
-          key={`${useCase}-${index}`}
-          className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-slate-950/50 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-400/25 hover:bg-slate-950/80"
-        >
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-indigo-400/20 bg-indigo-500/10 text-indigo-300">
-            <Check className="h-5 w-5" />
-          </div>
+  key={`${useCase}-${index}`}
+  className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-slate-950/50 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-400/25 hover:bg-slate-950/80"
+>
+  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-indigo-400/20 bg-indigo-500/10 text-indigo-300">
+    <Check className="h-5 w-5" />
+  </div>
 
-          <div>
-            <h3 className="text-sm font-bold text-white">{useCase}</h3>
-          </div>
-        </div>
+  <div>
+    <h3 className="text-sm font-bold text-white">{useCase}</h3>
+  </div>
+</div>
       )
     )}
   </div>
