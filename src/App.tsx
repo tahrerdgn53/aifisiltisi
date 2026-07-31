@@ -254,6 +254,25 @@ function AppContent() {
     }
   }, []);
 
+ useEffect(() => {
+  if (location.pathname === "/") {
+    document.title = "Aİ Fısıltısı";
+  }
+}, [location.pathname]);
+
+    const metaDescription = document.querySelector(
+      'meta[name="description"]'
+    );
+
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        "content",
+        "Yapay zekâ araçlarını keşfedin, karşılaştırın ve detaylı incelemelerini okuyun."
+      );
+    }
+  }
+}, [location.pathname]);
+
   const handleAdminLogin = (passcode: string): boolean => {
     // Read optional passcode from environment variables or fallback to obscured test passcode "fisilti123"
     const correctKey = (import.meta as any).env.VITE_ADMIN_PASSCODE || atob('ZmlzaWx0aTEyMw==');
