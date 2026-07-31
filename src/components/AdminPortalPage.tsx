@@ -378,23 +378,51 @@ export default function AdminPortalPage({
                           </div>
                         </div>
 
-                        <button
-                          onClick={() => {
-                            if (
-                              window.confirm(
-                                `"${news.title}" makalesini tamamen silmek istediğinize emin misiniz?`
-                              )
-                            ) {
-                              onDeleteNews(news.id);
-                            }
-                          }}
-                          className="flex items-center space-x-1 p-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/25 rounded-xl transition cursor-pointer flex-shrink-0"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                          <span className="hidden sm:inline font-mono text-[9px]">
-                            SİL
-                          </span>
-                        </button>
+                  <div className="flex items-center space-x-2 flex-shrink-0">
+  <button
+    onClick={() =>
+      setEditingNewsId(
+        editingNewsId === news.id ? null : news.id
+      )
+    }
+    className={`flex items-center space-x-1 p-2 border rounded-xl transition cursor-pointer ${
+      editingNewsId === news.id
+        ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40'
+        : 'bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border-indigo-500/25'
+    }`}
+  >
+    <Pencil className="w-3.5 h-3.5" />
+    <span className="hidden sm:inline font-mono text-[9px]">
+      {editingNewsId === news.id ? 'KAPAT' : 'DÜZENLE'}
+    </span>
+  </button>
+
+  <button
+    onClick={() => {
+      if (
+        window.confirm(
+          `"${news.title}" makalesini tamamen silmek istediğinize emin misiniz?`
+        )
+      ) {
+        onDeleteNews(news.id);
+      }
+    }}
+    className="flex items-center space-x-1 p-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/25 rounded-xl transition cursor-pointer"
+  >
+    <Trash2 className="w-3.5 h-3.5" />
+    <span className="hidden sm:inline font-mono text-[9px]">
+      SİL
+    </span>
+  </button>
+</div>
+
+                        editingNewsId === news.id && (
+  <EditNewsPanel
+    news={news}
+    onUpdateNews={onUpdateNews}
+    onClose={() => setEditingNewsId(null)}
+  />
+)}
                       </div>
                     ))}
                   </div>
