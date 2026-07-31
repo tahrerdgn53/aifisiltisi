@@ -42,7 +42,15 @@ export default function ToolDetailPage({
     const matched = findToolBySlug(tools, slug);
     if (matched) {
       setTool(matched);
-      document.title = `${matched.name} - En İyi Yapay Zeka Araçları - AIFısıltısı`;
+      document.title = matched.seoTitle || `${matched.name} - En İyi Yapay Zeka Araçları - Aİ Fısıltısı`;
+
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          'content',
+          matched.seoDescription || matched.description
+        );
+      }
       
       // Load comments from localstorage specific to this tool
       const stored = localStorage.getItem(`comments_${matched.id}`);
@@ -288,11 +296,9 @@ export default function ToolDetailPage({
     </div>
 
     <div className="mt-6 border-t border-white/5 pt-6">
-      <p className="text-sm leading-7 text-slate-300 sm:text-base">
-        {tool.name}, {tool.category.toLowerCase()} kategorisinde çözüm arayan
-        kullanıcılar için dikkat çeken seçeneklerden biridir.{' '}
-        {tool.description} Kullanım amacı, bütçe ve ihtiyaç duyulan özellikler
-        değerlendirilerek tercih edilmesi önerilir.
+      <p className="whitespace-pre-line text-sm leading-7 text-slate-300 sm:text-base">
+        {tool.editorReview ||
+          `${tool.name}, ${tool.category.toLowerCase()} kategorisinde çözüm arayan kullanıcılar için dikkat çeken seçeneklerden biridir. ${tool.description} Kullanım amacı, bütçe ve ihtiyaç duyulan özellikler değerlendirilerek tercih edilmesi önerilir.`}
       </p>
     </div>
 
@@ -329,24 +335,24 @@ export default function ToolDetailPage({
   </div>
 
   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    {tool.tags.slice(0, 4).map((tag, index) => (
-      <div
-        key={`${tag}-${index}`}
-        className="rounded-2xl border border-white/5 bg-slate-950/50 p-5 transition hover:border-cyan-400/20 hover:bg-slate-950/80"
-      >
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/10 text-cyan-300">
-          <User className="h-5 w-5" />
+    {(tool.targetAudience?.length ? tool.targetAudience : tool.tags.slice(0, 4)).map(
+      (audience, index) => (
+        <div
+          key={`${audience}-${index}`}
+          className="rounded-2xl border border-white/5 bg-slate-950/50 p-5 transition hover:border-cyan-400/20 hover:bg-slate-950/80"
+        >
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/10 text-cyan-300">
+            <User className="h-5 w-5" />
+          </div>
+
+          <h3 className="mt-4 text-sm font-bold text-white">{audience}</h3>
+
+          <p className="mt-2 text-xs leading-relaxed text-slate-500">
+            {tool.name} ile çalışmalarını daha hızlı ve verimli hâle getirmek isteyen kullanıcılar.
+          </p>
         </div>
-
-        <h3 className="mt-4 text-sm font-bold capitalize text-white">
-          {tag}
-        </h3>
-
-        <p className="mt-2 text-xs leading-relaxed text-slate-500">
-          {tool.name} ile {tag.toLowerCase()} odaklı süreçlerini geliştirmek isteyen kullanıcılar.
-        </p>
-      </div>
-    ))}
+      )
+    )}
   </div>
 </section>
 
@@ -367,26 +373,26 @@ export default function ToolDetailPage({
   </div>
 
   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {tool.tags.slice(0, 6).map((tag, index) => (
-      <div
-        key={`${tag}-${index}`}
-        className="group flex items-start gap-4 rounded-2xl border border-white/5 bg-slate-950/50 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-400/25 hover:bg-slate-950/80"
-      >
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-indigo-400/20 bg-indigo-500/10 text-indigo-300">
-          <Check className="h-5 w-5" />
-        </div>
+    {(tool.useCases?.length ? tool.useCases : tool.tags.slice(0, 6)).map(
+      (useCase, index) => (
+        <div
+          key={`${useCase}-${index}`}
+          className="group flex items-start gap-4 rounded-2xl border border-white/5 bg-slate-950/50 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-400/25 hover:bg-slate-950/80"
+        >
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-indigo-400/20 bg-indigo-500/10 text-indigo-300">
+            <Check className="h-5 w-5" />
+          </div>
 
-        <div>
-          <h3 className="text-sm font-bold capitalize text-white">
-            {tag}
-          </h3>
+          <div>
+            <h3 className="text-sm font-bold text-white">{useCase}</h3>
 
-          <p className="mt-2 text-xs leading-relaxed text-slate-500">
-            {tool.name} ile {tag.toLowerCase()} odaklı çalışmalarınızı daha hızlı ve verimli şekilde gerçekleştirebilirsiniz.
-          </p>
+            <p className="mt-2 text-xs leading-relaxed text-slate-500">
+              {tool.name} bu kullanım senaryosunda üretim sürecini hızlandırmaya yardımcı olabilir.
+            </p>
+          </div>
         </div>
-      </div>
-    ))}
+      )
+    )}
   </div>
 </section>
 
@@ -411,12 +417,15 @@ export default function ToolDetailPage({
     </div>
 
     <div className="space-y-3">
-      {[
-        `${tool.name}, ${tool.category.toLowerCase()} odaklı ihtiyaçlara hızlı çözümler sunar.`,
-        'Kullanıcı dostu yapısıyla yeni başlayanların adapte olmasını kolaylaştırır.',
-        `${tool.pricing} fiyatlandırma modeliyle farklı bütçelere hitap eder.`,
-        'Üretim ve iş akışlarında zaman kazandırmaya yardımcı olabilir.',
-      ].map((item, index) => (
+      {(tool.pros?.length
+        ? tool.pros
+        : [
+            `${tool.name}, ${tool.category.toLowerCase()} odaklı ihtiyaçlara hızlı çözümler sunar.`,
+            'Kullanıcı dostu yapısıyla yeni başlayanların adapte olmasını kolaylaştırır.',
+            `${tool.pricing} fiyatlandırma modeliyle farklı bütçelere hitap eder.`,
+            'Üretim ve iş akışlarında zaman kazandırmaya yardımcı olabilir.',
+          ]
+      ).map((item, index) => (
         <div
           key={index}
           className="flex items-start gap-3 rounded-2xl border border-emerald-400/10 bg-slate-950/40 p-4"
@@ -447,12 +456,15 @@ export default function ToolDetailPage({
     </div>
 
     <div className="space-y-3">
-      {[
-        'Ücretsiz kullanımda bazı özellikler veya kullanım limitleri kısıtlı olabilir.',
-        'En iyi sonuçları almak için doğru komutlar ve kısa bir öğrenme süreci gerekebilir.',
-        'Üretilen içeriklerin doğruluğu ve kalitesi kullanıcı tarafından kontrol edilmelidir.',
-        'Bazı gelişmiş özellikler yalnızca ücretli planlarda sunulabilir.',
-      ].map((item, index) => (
+      {(tool.cons?.length
+        ? tool.cons
+        : [
+            'Ücretsiz kullanımda bazı özellikler veya kullanım limitleri kısıtlı olabilir.',
+            'En iyi sonuçları almak için doğru komutlar ve kısa bir öğrenme süreci gerekebilir.',
+            'Üretilen içeriklerin doğruluğu ve kalitesi kullanıcı tarafından kontrol edilmelidir.',
+            'Bazı gelişmiş özellikler yalnızca ücretli planlarda sunulabilir.',
+          ]
+      ).map((item, index) => (
         <div
           key={index}
           className="flex items-start gap-3 rounded-2xl border border-rose-400/10 bg-slate-950/40 p-4"
