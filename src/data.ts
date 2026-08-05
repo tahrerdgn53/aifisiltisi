@@ -12,7 +12,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
   { id: 'video', label: 'Video & Animasyon', icon: 'Video' },
   { id: 'code', label: 'Yazılım & Kodlama', icon: 'Code' },
   { id: 'voice', label: 'Ses & Müzik', icon: 'Music' },
-  { id: 'productivity', label: 'Verimlilik', icon: 'Zap' }
+  { id: 'productivity', label: 'Verimlilik', icon: 'Zap' },
   { id: 'research', label: 'Araştırma', icon: 'Search' },
   { id: 'presentation', label: 'Sunum', icon: 'Presentation' },
   { id: 'automation', label: 'AI Agent & Otomasyon', icon: 'Bot' },
