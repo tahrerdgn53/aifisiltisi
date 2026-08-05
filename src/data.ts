@@ -13,6 +13,10 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
   { id: 'code', label: 'Yazılım & Kodlama', icon: 'Code' },
   { id: 'voice', label: 'Ses & Müzik', icon: 'Music' },
   { id: 'productivity', label: 'Verimlilik', icon: 'Zap' }
+  { id: 'research', label: 'Araştırma', icon: 'Search' },
+  { id: 'presentation', label: 'Sunum', icon: 'Presentation' },
+  { id: 'automation', label: 'AI Agent & Otomasyon', icon: 'Bot' },
+  { id: '3d', label: '3D & Modelleme', icon: 'Box' }
 ];
 
 export const INITIAL_TOOLS: AITool[] = [
