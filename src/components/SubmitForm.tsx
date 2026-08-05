@@ -123,16 +123,21 @@ export default function SubmitForm({ onAddTool, onAddNews }: SubmitFormProps) {
   };
 
   const getRandomLogoIcon = (cat: string) => {
-    const map: Record<string, string> = {
-      text: 'FileText',
-      image: 'Palette',
-      video: 'Tv',
-      code: 'Cpu',
-      voice: 'Volume2',
-      productivity: 'Zap'
-    };
-    return map[cat] || 'Sparkles';
+  const map: Record<string, string> = {
+    text: 'FileText',
+    image: 'Palette',
+    video: 'Tv',
+    code: 'Cpu',
+    voice: 'Volume2',
+    productivity: 'Zap',
+    research: 'Search',
+    presentation: 'Presentation',
+    automation: 'Bot',
+    '3d': 'Box'
   };
+
+  return map[cat] || 'Sparkles';
+};
 
   return (
     <section id="whisper-submit" className="max-w-4xl mx-auto px-4 py-8 sm:py-16">
@@ -255,6 +260,10 @@ export default function SubmitForm({ onAddTool, onAddNews }: SubmitFormProps) {
                     <option value="code">Yazılım & Kodlama</option>
                     <option value="voice">Ses & Müzik</option>
                     <option value="productivity">Verimlilik</option>
+                    <option value="research">Araştırma</option>
+                    <option value="presentation">Sunum</option>
+                    <option value="automation">AI Agent & Otomasyon</option>
+                    <option value="3d">3D & Modelleme</option>
                   </select>
                 </div>
 
