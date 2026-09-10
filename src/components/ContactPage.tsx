@@ -19,20 +19,42 @@ export default function ContactPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !email || !message) return;
-    setIsSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // Simulate submission handler hooks
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSent(true);
-      setName('');
-      setEmail('');
-      setMessage('');
-    }, 1500);
-  };
+  if (!name || !email || !message) return;
+
+  setIsSubmitting(true);
+
+  try {
+    const response = await fetch('https://formspree.io/f/xrpgjkzv', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Mesaj gönderilemedi.');
+    }
+
+    setIsSent(true);
+    setName('');
+    setEmail('');
+    setMessage('');
+  } catch (error) {
+    console.error('Formspree gönderim hatası:', error);
+    alert('Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#02040a] text-slate-100 py-20 px-4 sm:px-8 relative overflow-hidden">
@@ -132,7 +154,7 @@ export default function ContactPage() {
                 <div className="p-3.5 bg-cyan-950/20 border border-cyan-500/10 rounded-xl text-cyan-300 text-[11px] font-light leading-relaxed flex items-start space-x-2">
                   <HelpCircle className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                   <span>
-                    Gönderilen mesajlar Formspree/Mailchimp altyapımız üzerinden filtrelenir. Ekibimiz genellikle 24-48 saat içerisinde e-posta adresiniz üzerinden geri dönüş sağlar.
+                    Gönderilen mesajlar güvenli form altyapımız üzerinden iletilir. Ekibimiz genellikle 24-48 saat içerisinde e-posta adresiniz üzerinden geri dönüş sağlar.
                   </span>
                 </div>
 
