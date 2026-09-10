@@ -6,24 +6,45 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Shield, CheckCircle, ExternalLink, Loader2, Heart } from 'lucide-react';
+import { supabase } from '../supabase';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    setLoading(true);
-    
-    // Simulate Formspree/Mailchimp transmission hook
-    setTimeout(() => {
-      setLoading(false);
-      setSubscribed(true);
-      setEmail('');
-    }, 1200);
-  };
+  const handleSubscribe = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const normalizedEmail = email.trim().toLowerCase();
+  if (!normalizedEmail) return;
+
+  setLoading(true);
+
+  try {
+    const { error } = await supabase
+      .from('newsletter_subscribers')
+      .insert([{ email: normalizedEmail }]);
+
+    if (error) {
+      if (error.code === '23505') {
+        setSubscribed(true);
+        setEmail('');
+        return;
+      }
+
+      throw error;
+    }
+
+    setSubscribed(true);
+    setEmail('');
+  } catch (error) {
+    console.error('Newsletter kayıt hatası:', error);
+    alert('Abonelik oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <footer className="border-t border-white/10 bg-[#06080F] text-slate-400 py-16 px-6 sm:px-12 backdrop-blur-md">
