@@ -645,7 +645,6 @@ const handleAddNewsSubmit = async (newNews: any) => {
         bookmarkedCount={bookmarkedCount}
         openWhisperBot={() => setIsBotOpen(true)}
         onScrollToSection={handleScrollToSection}
-        isAdmin={isAdmin}
       />
 
       {/* Primary Routes Mapping */}
