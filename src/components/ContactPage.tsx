@@ -94,7 +94,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               <Building2 className="w-5 h-5 text-indigo-400 mt-1 flex-shrink-0" />
               <div>
                 <span className="block text-xs font-bold text-white uppercase tracking-wider font-mono">Reklam &amp; Affiliate Ortaklığı</span>
-                <span className="text-xs text-slate-400 block mt-0.5">Sponsorlu İçerik Sponsorlu Banner ve Araç Öne Çıkarma</span>
+                <span className="text-xs text-slate-400 block mt-0.5">Sponsorlu İçerik, Banner ve Araç Öne Çıkarma</span>
                 <span className="text-[10px] text-slate-500 mt-1 block">Projeniz "Haftanın AI Aracı" veya "Öne Çıkan AI Araçları" alanlarında hedef kitlenizle daha görünür şekilde buluşabilir..</span>
               </div>
             </div>
