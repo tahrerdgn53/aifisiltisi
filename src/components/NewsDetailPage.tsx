@@ -483,12 +483,14 @@ const relatedTools = [
                 <span className="text-[8px] bg-cyan-500/25 border border-cyan-500/30 text-cyan-400 font-bold px-2 py-0.5 rounded uppercase tracking-widest font-mono">
                   HAFTANIN AI ARACI
                 </span>
-                <h4 className="text-base font-extrabold text-white tracking-tight">Vercel v0</h4>
+                <h4 className="text-base font-extrabold text-white tracking-tight">
+  v0
+</h4>
                 <p className="text-xs text-slate-300 font-light leading-relaxed">
                   Basit bir metin tarifiyle saniyeler içinde React bileşenleri ve hazır tasarımlar üretin.
                 </p>
                 <Link
-                  to="/ai-tools/v0-by-vercel"
+                  to="/ai-tools/v0"
                   className="w-full text-center block px-4 py-2.5 bg-cyan-400 hover:bg-cyan-500 text-slate-950 font-black text-xs rounded-xl transition whitespace-nowrap"
                 >
                   Aracı İncele &amp; Git
