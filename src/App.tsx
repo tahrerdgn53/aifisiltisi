@@ -293,9 +293,16 @@ function AppContent() {
     password
   });
 
-  if (error || !data.user) {
-    return false;
-  }
+  if (error) {
+  console.error('Admin login error:', error);
+  alert('Giriş hatası: ' + error.message);
+  return false;
+}
+
+if (!data.user) {
+  alert('Giriş başarısız: kullanıcı bilgisi alınamadı.');
+  return false;
+}
 
   if (data.user.id !== '5c5484c9-66a9-4083-8df1-091b1745f7d7') {
     await supabase.auth.signOut();
