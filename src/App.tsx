@@ -622,10 +622,22 @@ const handleAddNewsSubmit = async (newNews: any) => {
   );
 };
 
-  const handleDeleteNews = (id: string) => {
-    const updated = newsList.filter(n => n.id !== id);
-    saveNews(updated);
-  };
+ const handleDeleteNews = async (id: string) => {
+  const { error } = await supabase
+    .from('articles')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    alert('Makale silinemedi: ' + error.message);
+    console.error('Article delete error:', error);
+    return;
+  }
+
+  setNewsList((currentNews) =>
+    currentNews.filter((news) => news.id !== id)
+  );
+};
 
   const handleScrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
