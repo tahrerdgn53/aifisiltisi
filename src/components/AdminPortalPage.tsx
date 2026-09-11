@@ -130,7 +130,7 @@ export default function AdminPortalPage({
 
               <p className="text-xs text-slate-500 leading-relaxed font-light">
                 Bu alana yalnızca yetkili AIFısıltısı yöneticileri erişebilir.
-                Lütfen özel fısıltı sistem şifrenizi girin.
+                Lütfen yetkili yönetici e-posta adresiniz ve şifrenizle giriş yapın.
               </p>
             </div>
 
@@ -138,18 +138,32 @@ export default function AdminPortalPage({
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 rounded-xl blur opacity-80 group-focus-within:opacity-100 transition duration-300" />
 
-                <input
-                  type="password"
-                  autoFocus
-                  required
-                  value={passcodeInput}
-                  onChange={(event) => {
-                    setPasscodeInput(event.target.value);
-                    setErrorMessage('');
-                  }}
-                  placeholder="Yönetici anahtarını fısıldayın..."
-                  className="relative w-full bg-[#080b12]/95 border border-white/10 focus:border-cyan-500/50 rounded-xl px-5 py-4 text-center text-xs sm:text-sm text-slate-200 outline-none transition"
-                />
+                <div className="space-y-3">
+  <input
+    type="email"
+    autoFocus
+    required
+    value={emailInput}
+    onChange={(event) => {
+      setEmailInput(event.target.value);
+      setErrorMessage('');
+    }}
+    placeholder="Yönetici e-posta adresi"
+    className="relative w-full bg-[#080b12]/95 border border-white/10 focus:border-cyan-500/50 rounded-xl px-5 py-4 text-center text-xs sm:text-sm text-slate-200 outline-none transition"
+  />
+
+  <input
+    type="password"
+    required
+    value={passwordInput}
+    onChange={(event) => {
+      setPasswordInput(event.target.value);
+      setErrorMessage('');
+    }}
+    placeholder="Yönetici şifresi"
+    className="relative w-full bg-[#080b12]/95 border border-white/10 focus:border-cyan-500/50 rounded-xl px-5 py-4 text-center text-xs sm:text-sm text-slate-200 outline-none transition"
+  />
+</div>
               </div>
 
               {errorMessage && (
