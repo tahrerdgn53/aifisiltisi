@@ -54,7 +54,7 @@ export default function Footer() {
         <div className="md:col-span-1.5 space-y-4">
           <Link to="/" className="inline-block select-none">
             <img 
-              src="./logo.png" 
+              src="/logo.png" 
               alt="AI Fısıltısı Logo" 
               className="h-[70px] md:h-[90px] w-auto object-contain transition-opacity hover:opacity-90"
               referrerPolicy="no-referrer"
