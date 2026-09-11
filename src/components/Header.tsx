@@ -14,7 +14,6 @@ interface HeaderProps {
   bookmarkedCount: number;
   openWhisperBot: () => void;
   onScrollToSection: (sectionId: string) => void;
-  isAdmin: boolean;
 }
 
 export default function Header({
@@ -22,8 +21,7 @@ export default function Header({
   setActiveTab,
   bookmarkedCount,
   openWhisperBot,
-  onScrollToSection,
-  isAdmin
+  onScrollToSection
 }: HeaderProps) {
   const navigate = useNavigate();
   const location = useLocation();
