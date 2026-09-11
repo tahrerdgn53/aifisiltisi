@@ -707,7 +707,6 @@ const handleAddNewsSubmit = async (newNews: any) => {
                 onUpdateNews={handleUpdateNews}
                 onDeleteTool={handleDeleteTool}
                 onDeleteNews={handleDeleteNews}
-                isAdmin={isAdmin}
                 onLogin={handleAdminLogin}
                 onLogout={handleAdminLogout}
               />
