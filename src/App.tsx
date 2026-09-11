@@ -248,11 +248,24 @@ function AppContent() {
 
   // Load and check persist administrative states
   useEffect(() => {
-    const authStatus = localStorage.getItem('aifisiltisi_isAdmin');
-    if (authStatus === 'true') {
-      setIsAdmin(true);
-    }
-  }, []);
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    setIsAdmin(
+      session?.user?.id === '5c5484c9-66a9-4083-8df1-091b1745f7d7'
+    );
+  });
+
+  const {
+    data: { subscription }
+  } = supabase.auth.onAuthStateChange((_event, session) => {
+    setIsAdmin(
+      session?.user?.id === '5c5484c9-66a9-4083-8df1-091b1745f7d7'
+    );
+  });
+
+  return () => {
+    subscription.unsubscribe();
+  };
+}, []);
 
   useEffect(() => {
     if (location.pathname === '/') {
