@@ -6,7 +6,7 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Sparkles, Bookmark, Calendar, Bot, Lock } from 'lucide-react';
+import { Sparkles, Bookmark, Calendar, Bot } from 'lucide-react';
 
 interface HeaderProps {
   activeTab: 'tools' | 'news';
@@ -100,20 +100,6 @@ export default function Header({
             <Bot className="w-4 h-4 text-cyan-400 animate-pulse" />
             <span className="hidden xs:inline">Rehbere Sor</span>
           </motion.button>
-
-          {/* Secure Admin Gate Route Trigger Link */}
-          <Link
-            to="/admin"
-            className={`flex items-center space-x-1.5 px-3 py-2 rounded-xl text-button text-xs font-bold border transition-all ${
-              isAdmin 
-                ? 'bg-emerald-500/15 border-emerald-500/20 text-emerald-400 font-extrabold' 
-                : 'bg-white/5 border-white/10 text-slate-300 hover:text-white'
-            }`}
-            title="Yönetici Paneli"
-          >
-            <Lock className={`w-3.5 h-3.5 ${isAdmin ? 'text-emerald-400 animate-pulse' : 'text-cyan-400'}`} />
-            <span className="hidden sm:inline">Portal</span>
-          </Link>
 
           {/* Bookmarks Counter */}
           <div
