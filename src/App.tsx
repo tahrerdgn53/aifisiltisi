@@ -605,10 +605,22 @@ const handleAddNewsSubmit = async (newNews: any) => {
   setNewsList(mappedNews as any);
 };
 
-  const handleDeleteTool = (id: string) => {
-    const updated = tools.filter(t => t.id !== id);
-    saveTools(updated);
-  };
+ const handleDeleteTool = async (id: string) => {
+  const { error } = await supabase
+    .from('tools')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    alert('Araç silinemedi: ' + error.message);
+    console.error('Tool delete error:', error);
+    return;
+  }
+
+  setTools((currentTools) =>
+    currentTools.filter((tool) => tool.id !== id)
+  );
+};
 
   const handleDeleteNews = (id: string) => {
     const updated = newsList.filter(n => n.id !== id);
