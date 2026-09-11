@@ -153,13 +153,6 @@ export default function Footer() {
         </div>
         
         <div className="flex items-center space-x-4">
-          <Link
-            to="/admin"
-            className="text-[11px] font-semibold text-cyan-500/70 hover:text-cyan-400 hover:underline transition flex items-center space-x-1 cursor-pointer"
-          >
-            <span>🔒 Yönetici Geçidi</span>
-          </Link>
-          <span>&bull;</span>
           <span className="font-mono text-[10px] text-slate-600">v2.4.0 Production</span>
         </div>
       </div>
