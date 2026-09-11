@@ -26,7 +26,7 @@ function LegalWrapper({ title, icon: Icon, children }: { title: string; icon: an
           </div>
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{title}</h1>
-            <p className="text-[10px] sm:text-xs text-slate-550 font-mono mt-0.5">Son Güncelleme: 19 Haziran 2026</p>
+            <p className="text-[10px] sm:text-xs text-slate-550 font-mono mt-0.5">Son Güncelleme: 11 Eylül 2026</p>
           </div>
         </div>
 
@@ -49,24 +49,61 @@ export function PrivacyPage() {
       </p>
 
       <div className="space-y-4 pt-4">
-        <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">1. Toplanan Veriler</h3>
+        <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">
+  1. Toplanan Veriler
+</h3>
         <p>
-          AIFısıltısı, genel ziyaretçi istatistiklerini izlemek (örneğin tıklanan araç kategorileri, haber okuma oranları) amacıyla tamamen anonim analiz verileri toplar. Ayrıca, bültenimize kendi rızanızla e-posta adresinizi bırakmanız durumunda sadece bu iletişim adresi sistemlerimize güvenle kaydedilir.
-        </p>
+  Aİ Fısıltısı'nı ziyaret ettiğinizde, site kullanımına ilişkin teknik ve
+  istatistiksel veriler analiz araçları aracılığıyla işlenebilir. Bu veriler;
+  ziyaret edilen sayfalar, kullanılan cihaz ve tarayıcı türü, yaklaşık konum
+  bilgisi ve siteyle etkileşimlere ilişkin bilgileri içerebilir.
+</p>
+
+<p>
+  E-posta bültenimize kendi isteğinizle abone olmanız durumunda, tarafınızca
+  sağlanan e-posta adresi bülten aboneliğinin oluşturulması ve yönetilmesi
+  amacıyla kaydedilir.
+</p>
+
+<p>
+  İletişim formumuzu kullanmanız durumunda ise adınız, e-posta adresiniz ve
+  tarafınızca gönderilen mesaj içeriği, talebinizin alınması ve sizinle
+  iletişime geçilebilmesi amacıyla işlenir.
+</p>
       </div>
 
       <div className="space-y-4">
         <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">2. Verilerin Kullanım Amacı</h3>
         <p>
-          Toplanan veriler yalnızca platformumuzun kullanıcı deneyimini optimize etmek, teknik aksaklıkları gidermek, haftalık bülten içeriklerini ulaştırmak ve fısıltı asistanımızın yanıt parametrelerini sizlerin aramalarına göre zenginleştirmek için kullanılır. Üçüncü partilere pazarlama amacıyla asla satılmaz veya kiralanmaz.
-        </p>
+  Toplanan veya tarafınızca sağlanan veriler; web sitesinin çalışmasını
+  sağlamak, kullanıcı deneyimini geliştirmek, site performansını ve kullanım
+  istatistiklerini analiz etmek, teknik sorunları tespit etmek, iletişim
+  taleplerine yanıt vermek ve talep edilmesi halinde e-posta bültenlerini
+  göndermek amacıyla kullanılabilir.
+</p>
+
+<p>
+  Kişisel bilgileriniz reklam veya pazarlama amacıyla üçüncü taraflara satılmaz
+  veya kiralanmaz. Bununla birlikte, web sitesinin işletilmesi için kullanılan
+  analiz, iletişim, veri saklama ve benzeri hizmetlerin sağlanması kapsamında
+  gerekli bilgiler ilgili hizmet sağlayıcıları tarafından işlenebilir.
+</p>
       </div>
 
       <div className="space-y-4">
         <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">3. Güvenlik ve Altyapı</h3>
-        <p>
-          Kişisel verileriniz modern şifreleme algoritmalarıyla ve Google Bulut sistemleri üzerinde barındırılan güvenli katmanlarda saklanmaktadır. Yetkisiz erişimleri durdurmak için periyodik altyapı denetimleri yapılmaktadır.
-        </p>
+       <p>
+  Kişisel verilerin korunması için, hizmet sağlayıcılarımızın sunduğu güvenlik
+  önlemlerinden ve erişim kontrollerinden yararlanılır. Veriler yalnızca ilgili
+  hizmetin sağlanması için gerekli olduğu ölçüde işlenir ve yetkisiz erişimi,
+  değişikliği veya ifşayı önlemeye yönelik teknik ve idari önlemler uygulanır.
+</p>
+
+<p>
+  Aİ Fısıltısı kapsamında kullanılan üçüncü taraf hizmetlerin kendi güvenlik ve
+  veri işleme uygulamaları geçerlidir. Bu hizmet sağlayıcılar arasında analiz,
+  iletişim ve veri saklama hizmetleri sunan platformlar yer alabilir.
+</p>
       </div>
 
       <div className="p-4 bg-cyan-950/20 border border-cyan-500/20 text-cyan-300 rounded-xl leading-relaxed">
@@ -74,7 +111,7 @@ export function PrivacyPage() {
           <Info className="w-4 h-4 text-cyan-400" />
           <span>KVKK ve GDPR Uyumluluğu</span>
         </span>
-        Dilediğiniz zaman bültenden ayrılma, verilerinizin sistemlerimizden kalıcı olarak silinmesini talep etme hakkına sahipsiniz. Bunun için doğrudan <strong className="font-mono text-white text-[11px]">tahrerdgn53@gmail.com</strong> adresine talep göndermeniz yeterlidir.
+        Kişisel verilerinizle ilgili olarak; verilerinizin işlenip işlenmediğini öğrenme, işlenen verilere erişme, yanlış veya eksik bilgilerin düzeltilmesini isteme ve uygun koşullarda verilerinizin silinmesini veya işlenmesinin sınırlandırılmasını talep etme haklarına sahip olabilirsiniz. E-posta bülteni aboneliğinizi dilediğiniz zaman sonlandırabilir ve kişisel verilerinizle ilgili taleplerinizi <strong className="font-mono text-white text-[11px]">aifisiltisi@gmail.com</strong> adresine iletebilirsiniz.
       </div>
     </LegalWrapper>
   );
@@ -84,30 +121,63 @@ export function PrivacyPage() {
 export function CookiesPage() {
   return (
     <LegalWrapper title="Çerez Politikası" icon={Eye}>
-      <p className="text-slate-400">
-        Bu Çerez Politikası, web sitemiz AIFısıltısı’nda neden çerezler (cookies) kullandığımızı ve bu çerezleri nasıl kontrol edebileceğinizi açıklamaktadır. Sitemizi kullanmaya devam ederek çerezlerin bu kurallara göre kullanılmasını onaylarsınız.
-      </p>
+    <p className="text-slate-400">
+  Bu Çerez Politikası, Aİ Fısıltısı'nda kullanılan çerezler ve benzeri
+  teknolojilerin hangi amaçlarla kullanıldığını ve bu teknolojilere ilişkin
+  tercihlerinizi nasıl yönetebileceğinizi açıklamaktadır. Zorunlu olmayan
+  çerezler ve benzeri teknolojiler, yürürlükteki mevzuatın gerekli kıldığı
+  durumlarda kullanıcı tercihleri doğrultusunda kullanılacaktır.
+</p>
 
       <div className="space-y-4 pt-4">
         <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">1. Çerez Nedir?</h3>
-        <p>
-          Çerezler, bir web sitesini ziyaret ettiğinizde tarayıcınıza veya bilgisayarınıza kaydedilen küçük metin dosyalarıdır. Çerezler web sitesinin daha kararlı çalışmasına, tercihlerinizi hatırlamasına ve içerik verimliliğinizi izlememize yardımcı olur.
-        </p>
+       <p>
+  Çerezler, bir web sitesini ziyaret ettiğinizde tarayıcınız aracılığıyla
+  cihazınıza kaydedilebilen küçük veri dosyalarıdır. Benzer teknolojiler de
+  kullanıcı tercihlerini hatırlamak, site işlevlerini çalıştırmak, kullanım
+  istatistiklerini ölçmek ve bazı durumlarda reklam veya analiz hizmetlerini
+  desteklemek amacıyla kullanılabilir.
+</p>
       </div>
 
       <div className="space-y-4">
         <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">2. Kullandığımız Çerez Türleri</h3>
-        <p>
-          <strong>Zorunlu Çerezler:</strong> Sitemizin temel işlevlerinin (örneğin koyu/açık tema modu tercihiniz, asistan sohbet geçmişi veya yönetici fısıltı oturumu) çalıştırılabilmesi için gereken çerezlerdir. <br />
-          <strong>Performans Çerezleri:</strong> Google Analytics gibi analiz araçlarımız aracılığıyla ziyaretçilerin sitemizi nasıl kullandığını tespit eden, anonim veriler içeren çerezlerdir.
-        </p>
+       <p>
+  <strong>Zorunlu Çerezler:</strong> Web sitesinin temel işlevlerinin
+  çalışması, kullanıcı tercihlerinin hatırlanması ve gerekli teknik
+  işlemlerin gerçekleştirilmesi amacıyla kullanılan çerezler ve benzeri
+  teknolojilerdir.
+  <br /><br />
+
+  <strong>Analiz ve Performans Teknolojileri:</strong> Google Analytics gibi
+  analiz hizmetleri; ziyaretçilerin siteyi nasıl kullandığını anlamamıza,
+  trafik ve performans istatistiklerini ölçmemize ve kullanıcı deneyimini
+  geliştirmemize yardımcı olabilir.
+  <br /><br />
+
+  <strong>Reklam Teknolojileri:</strong> Aİ Fısıltısı, Google AdSense gibi
+  reklam hizmetlerinden yararlanabilir. Bu hizmetler kapsamında Google ve
+  diğer reklam teknolojisi sağlayıcıları, yürürlükteki mevzuat ve kullanıcı
+  tercihleri doğrultusunda reklamların sunulması, ölçülmesi ve
+  kişiselleştirilmesi amacıyla çerezler veya benzeri teknolojiler
+  kullanabilir.
+</p>
       </div>
 
       <div className="space-y-4">
         <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">3. Çerez Kontrolü ve Devre Dışı Bırakma</h3>
-        <p>
-          Tarayıcınızın ayarlar menüsüne girerek çerezleri tamamen engelleyebilir veya sadece belirli web siteleri için sınırlandırabilirsiniz. Ancak çerezlerin devre dışı bırakılması durumunda, sitemizdeki bazı etkileşimli özelliklerin (örn: tema geçişi veya beğeniler) çalışmasında aksaklıklar yaşanabilir.
-        </p>
+<p>
+  Tarayıcı ayarlarınız üzerinden çerezleri görüntüleyebilir, silebilir veya
+  engelleyebilirsiniz. Ancak zorunlu çerezlerin engellenmesi, web sitesindeki
+  bazı işlevlerin beklendiği şekilde çalışmamasına neden olabilir.
+</p>
+
+<p>
+  İzin gerektiren analiz ve reklam teknolojilerinin kullanıldığı durumlarda,
+  uygun bir izin yönetim mekanizması sunulabilir. Bu mekanizma üzerinden
+  tercihlerinizi belirleyebilir ve sunulan seçenekler kapsamında daha sonra
+  değiştirebilirsiniz.
+</p>
       </div>
     </LegalWrapper>
   );
@@ -131,7 +201,7 @@ export function TermsPage() {
       <div className="space-y-4">
         <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">2. Sorumluluk Reddi</h3>
         <p>
-          Sitemizde derlenen yapay zeka araçları ve bu araçların yönlendirildiği dış bağlantılar (URL) tamamen bilgi amaçlıdır. Araçların fiyat politikalarında, geliştirici şartlarında veya kullanım esnasında yaşayabileceğiniz veri kayıplarından AIFısıltısı platformu hiçbir şekilde hukuki olarak sorumlu tutulamaz. Dış bağlantılar üzerinden işlem yaparken ilgili sitelerin kendi sözleşmelerini incelemeliyiz.
+          Sitemizde derlenen yapay zeka araçları ve bu araçların yönlendirildiği dış bağlantılar (URL) tamamen bilgi amaçlıdır. Araçların fiyat politikalarında, geliştirici şartlarında veya kullanım esnasında yaşayabileceğiniz veri kayıplarından AIFısıltısı platformu hiçbir şekilde hukuki olarak sorumlu tutulamaz. Dış bağlantılar üzerinden işlem yaparken ilgili sitelerin kendi sözleşmelerini incelemelisiniz.
         </p>
       </div>
 
