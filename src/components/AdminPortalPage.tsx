@@ -185,9 +185,8 @@ export default function AdminPortalPage({
 
               <div>
                 <span className="font-bold block mb-1">Erişim Bildirimi:</span>
-                Hatalı şifre denemeleri ve yetkisiz erişim istekleri güvenlik
-                politikalarımız gereği kayıt altına fısıldanabilir. Lütfen gizli
-                anahtarınızı kimseyle paylaşmayınız.
+Bu alan yalnızca yetkili yönetici hesabına açıktır. Oturum doğrulaması
+güvenli kimlik doğrulama altyapısı üzerinden gerçekleştirilir.
               </div>
             </div>
           </div>
