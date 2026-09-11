@@ -85,7 +85,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               <Mail className="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0" />
               <div>
                 <span className="block text-xs font-bold text-white uppercase tracking-wider font-mono">E-posta Adresimiz</span>
-                <span className="text-xs text-slate-400 block mt-0.5">tahrerdgn53@gmail.com</span>
+                <span className="text-xs text-slate-400 block mt-0.5">aifisiltisi@gmail.com</span>
                 <span className="text-[10px] text-slate-500 mt-1 block">Tüm sponsorluk ve hak talepleri için destek hattıdır.</span>
               </div>
             </div>
