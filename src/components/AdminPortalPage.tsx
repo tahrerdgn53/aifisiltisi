@@ -55,9 +55,34 @@ export default function AdminPortalPage({
   const [editingNewsId, setEditingNewsId] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = 'Sistem Yönetim Paneli - AIFısıltısı';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  document.title = 'Sistem Yönetim Paneli - AIFısıltısı';
+
+  let robotsMeta = document.querySelector(
+    'meta[name="robots"]'
+  ) as HTMLMetaElement | null;
+
+  const previousContent = robotsMeta?.content;
+
+  if (!robotsMeta) {
+    robotsMeta = document.createElement('meta');
+    robotsMeta.name = 'robots';
+    document.head.appendChild(robotsMeta);
+  }
+
+  robotsMeta.content = 'noindex, nofollow';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  return () => {
+    if (robotsMeta) {
+      if (previousContent) {
+        robotsMeta.content = previousContent;
+      } else {
+        robotsMeta.remove();
+      }
+    }
+  };
+}, []);
 
   const handleLoginSubmit = async (event: React.FormEvent) => {
   event.preventDefault();
