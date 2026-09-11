@@ -92,7 +92,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
             {[
               "Profesyonel ve sadeleştirilmiş arayüz tasarımları",
-              "Sponsorlu ve reklamlardan arındırılmış nitelikli listeler",
+              "Editoryal kaliteyi ve kullanıcı faydasını odağa alan nitelikli listeler",
               "Yapay zeka asistanları ile anlık akıllı eşleştirme",
               "En güncel dil modeli ve multimodal yetenekleri takibi"
             ].map((topic, i) => (
