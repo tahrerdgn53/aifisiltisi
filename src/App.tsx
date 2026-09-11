@@ -706,17 +706,18 @@ const handleAddNewsSubmit = async (newNews: any) => {
             path="/admin"
             element={
               <AdminPortalPage
-                tools={tools}
-                newsList={newsList}
-                onAddTool={handleAddToolSubmit}
-                onAddNews={handleAddNewsSubmit}
-                onUpdateTool={handleUpdateTool}
-                onUpdateNews={handleUpdateNews}
-                onDeleteTool={handleDeleteTool}
-                onDeleteNews={handleDeleteNews}
-                onLogin={handleAdminLogin}
-                onLogout={handleAdminLogout}
-              />
+  tools={tools}
+  newsList={newsList}
+  onAddTool={handleAddToolSubmit}
+  onAddNews={handleAddNewsSubmit}
+  onUpdateTool={handleUpdateTool}
+  onUpdateNews={handleUpdateNews}
+  onDeleteTool={handleDeleteTool}
+  onDeleteNews={handleDeleteNews}
+  isAdmin={isAdmin}
+  onLogin={handleAdminLogin}
+  onLogout={handleAdminLogout}
+/>
             }
           />
 
