@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Shield, CheckCircle, ExternalLink, Loader2, Heart } from 'lucide-react';
+import { Mail, Shield, CheckCircle, Loader2, Heart } from 'lucide-react';
 import { supabase } from '../supabase';
 
 export default function Footer() {
@@ -118,12 +118,6 @@ export default function Footer() {
             </li>
             <li>
               <Link to="/contact" className="hover:text-cyan-400 transition-colors duration-150">İletişim &amp; Reklam</Link>
-            </li>
-            <li>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors duration-150 flex items-center space-x-1">
-                <span>GitHub Topluluğu</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
             </li>
           </ul>
         </div>
