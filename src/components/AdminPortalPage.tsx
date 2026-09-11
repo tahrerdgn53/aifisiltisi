@@ -28,7 +28,7 @@ interface AdminPortalPageProps {
   onDeleteNews: (id: string) => void;
   onUpdateNews: (news: AINews) => void | Promise<void>;
   isAdmin: boolean;
-  onLogin: (passcode: string) => boolean;
+  onLogin: (email: string, password: string) => Promise<boolean>;
   onLogout: () => void;
 }
 
@@ -45,7 +45,8 @@ export default function AdminPortalPage({
   onLogin,
   onLogout
 }: AdminPortalPageProps) {
-  const [passcodeInput, setPasscodeInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [activeSubTab, setActiveSubTab] = useState<
     'create' | 'manage_tools' | 'manage_news'
@@ -58,20 +59,21 @@ export default function AdminPortalPage({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const handleLoginSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    setErrorMessage('');
+  const handleLoginSubmit = async (event: React.FormEvent) => {
+  event.preventDefault();
+  setErrorMessage('');
 
-    const success = onLogin(passcodeInput);
+  const success = await onLogin(emailInput, passwordInput);
 
-    if (success) {
-      setPasscodeInput('');
-    } else {
-      setErrorMessage(
-        'Hatalı sistem anahtarı! Yetkisiz istek sonlandırıldı.'
-      );
-    }
-  };
+  if (success) {
+    setEmailInput('');
+    setPasswordInput('');
+  } else {
+    setErrorMessage(
+      'E-posta veya şifre hatalı ya da bu hesabın yönetici yetkisi bulunmuyor.'
+    );
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#020408] text-slate-100 py-16 px-4 sm:px-8 relative overflow-hidden">
