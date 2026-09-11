@@ -284,22 +284,33 @@ function AppContent() {
     }
   }, [location.pathname]);
 
-  const handleAdminLogin = (passcode: string): boolean => {
-    // Read optional passcode from environment variables or fallback to obscured test passcode "fisilti123"
-    const correctKey = (import.meta as any).env.VITE_ADMIN_PASSCODE || atob('ZmlzaWx0aTEyMw==');
-    if (passcode === correctKey) {
-      setIsAdmin(true);
-      localStorage.setItem('aifisiltisi_isAdmin', 'true');
-      return true;
-    }
-    return false;
-  };
+  const handleAdminLogin = async (
+  email: string,
+  password: string
+): Promise<boolean> => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
 
-  const handleAdminLogout = () => {
-    setIsAdmin(false);
-    localStorage.removeItem('aifisiltisi_isAdmin');
-    navigate('/');
-  };
+  if (error || !data.user) {
+    return false;
+  }
+
+  if (data.user.id !== '5c5484c9-66a9-4083-8df1-091b1745f7d7') {
+    await supabase.auth.signOut();
+    return false;
+  }
+
+  setIsAdmin(true);
+  return true;
+};
+
+const handleAdminLogout = async () => {
+  await supabase.auth.signOut();
+  setIsAdmin(false);
+  navigate('/');
+};
 
   // Manage data list state and sync with localstorage
 useEffect(() => {
